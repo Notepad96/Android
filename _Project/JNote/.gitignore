@@ -144,6 +144,6 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 
-app/src/main/assets/
+*.txt
 
 # End of https://www.toptal.com/developers/gitignore/api/androidstudio
