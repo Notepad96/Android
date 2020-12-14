@@ -1,0 +1,8 @@
+implementation("com.louiscad.splitties:splitties-fun-pack-android-base:3.0.0-beta01")
+      
+
+keytool -exportcert -alias androiddebugkey -keystore "C:\Users\tlsgh\.android\debug.keystore" | "C:\SSL\bin\openssl" sha1 -binary | "C:\SSL\bin\openssl" base64
+      
+
+
+ga0RGNYHvNM5d0SLGQfpQWAPGJ8=
