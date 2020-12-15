@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/one"
+        android:title="1 단계" />
+    <item
+        android:id="@+id/two"
+        android:title="2 단계" />
+    <item
+        android:id="@+id/three"
+        android:title="3 단계" />
+    <item
+        android:id="@+id/four"
+        android:title="4 단계" />
+    <item
+        android:id="@+id/five"
+        android:title="5 단계" />
+    <item
+        android:id="@+id/six"
+        android:title="6 단계" />
+</menu>
