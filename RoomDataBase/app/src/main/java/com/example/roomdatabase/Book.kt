@@ -11,4 +11,8 @@ data class Book(
     var price: Int
 ) {
     @PrimaryKey(autoGenerate = true) var id: Long = 0
+
+    override fun toString(): String {
+        return "id = $id, name = $name, writer = $writer, price = $price"
+    }
 }
