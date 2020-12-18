@@ -16,14 +16,6 @@ abstract class AppDataBase : RoomDatabase() {
     companion object {
         private var Instance: AppDataBase? = null
 
-        // 마이그레이션 부분
-        val MIGRATION_1_2 = object : Migration(1, 2) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("CREATE TABLE `books2` (`id` LONG, `name` TEXT, `writer` TEXT, `price` INTEGER, " +
-                        "PRIMARY KEY(`id`))")
-            }
-        }
-
         fun getInstance(context: Context): AppDataBase? {
             if(Instance == null) {
                 synchronized(AppDataBase::class) {
@@ -36,6 +28,18 @@ abstract class AppDataBase : RoomDatabase() {
                 }
             }
             return Instance
+        }
+
+        fun deleteInstance() {
+            Instance = null
+        }
+
+        // 마이그레이션 부분 (생략)
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE `books2` (`id` LONG, `name` TEXT, `writer` TEXT, `price` INTEGER, " +
+                        "PRIMARY KEY(`id`))")
+            }
         }
     }
 

@@ -20,6 +20,12 @@ class MainActivity : AppCompatActivity() {
         db = AppDataBase.getInstance(this)
     }
 
+    override fun onDestroy() {
+        db = null
+        AppDataBase.deleteInstance()
+        super.onDestroy()
+    }
+
     fun insert(view: View) {
         val name = if(insertName.text.isBlank()) "Empty" else insertName.text.toString()
         val writer = if(insertWriter.text.isBlank()) "Empty" else insertWriter.text.toString()

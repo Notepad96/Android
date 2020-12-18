@@ -48,5 +48,4 @@ interface BookDao {
     @Query("SELECT EXISTS ( SELECT * FROM books where id = :id)")
     fun isBook(id: Long): Int
 
-
 }
