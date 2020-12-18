@@ -10,8 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="20dp">
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/insertName"
@@ -38,6 +37,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="Price"
+            android:imeOptions="actionNone"
             android:inputType="number" />
 
         <Button
@@ -62,7 +62,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="삭제 ID"
-            android:inputType="textPersonName" />
+            android:inputType="number" />
 
         <Button
             android:id="@+id/button2"
@@ -71,6 +71,60 @@
             android:layout_weight="1"
             android:onClick="delete"
             android:text="삭 제" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/updateID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="업데이트 ID"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/updateValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Value"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/unBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="update"
+            android:text="Name 변경" />
+
+        <Button
+            android:id="@+id/uwBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="update"
+            android:text="Writer 변경" />
+
+        <Button
+            android:id="@+id/upBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="update"
+            android:text="Price 변경" />
     </LinearLayout>
 
     <TextView
@@ -88,6 +142,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="listUpdate"
-        android:text="Update" />
+        android:text="View Update" />
 
 </LinearLayout>
