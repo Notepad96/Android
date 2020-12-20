@@ -45,6 +45,9 @@ interface BookDao {
     @Query("SELECT COUNT(*) FROM books")
     fun getCount(): Int
 
+    @Query("SELECT * FROM books where book_name LIKE '%:name%'")
+    fun searchName(name: String): Book?
+
     @Query("SELECT EXISTS ( SELECT * FROM books where id = :id)")
     fun isBook(id: Long): Int
 
