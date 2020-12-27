@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <style name="Basic" parent="Theme.StyleCustom">
+    </style>
+
+    <style name="DarkMode" parent="CustomStyle">
+        <item name="materialButtonStyle">@style/DarkMode.ButtonStyle</item>
+    </style>
+
+    <style name="DarkMode.ButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/action</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+</resources>
