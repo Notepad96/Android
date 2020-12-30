@@ -31,4 +31,6 @@ interface HanjaDao {
     @Query("SELECT * FROM hanja_list WHERE level = :level")
     fun getListLevel(level: Int): List<Hanja>
 
+    @Query("SELECT COUNT(*) FROM hanja_list")
+    fun getCount(): Long
 }

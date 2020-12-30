@@ -3,7 +3,11 @@ package com.example.txttodb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.example.jnote.AppDataBase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     var db: AppDataBase? = null
@@ -13,7 +17,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         db = AppDataBase.getInstance(this)
-        createDatabase()
+        CoroutineScope(Dispatchers.IO).launch {
+            if(db?.hanjaDao()?.getCount() == 0L) {
+                createDatabase()
+            }
+        }
+
     }
 
     override fun onDestroy() {
@@ -26,13 +35,19 @@ class MainActivity : AppCompatActivity() {
         val inputStream = resources.assets.open("hanja.txt")
 
         inputStream.bufferedReader().readLines().forEach {
-            var tok = it.trim().split("\t")
-            Log.d("test", tok.toString())
-            /*
+            var line = it.trim().split("\t").map { it.trim { it <= '\"' } }
+            Log.d("test", line.joinToString("|"))
+
             CoroutineScope(Dispatchers.IO).launch {
-                db?.hanjaDao()?.insertHanja()
+                db?.hanjaDao()?.insertHanja(line[0].toInt(), line[1], line[2], line[3])
             }
-             */
+
+        }
+    }
+
+    fun allDelete(v: View) {
+        CoroutineScope(Dispatchers.IO).launch {
+            db?.hanjaDao()?.deleteAll()
         }
     }
 
