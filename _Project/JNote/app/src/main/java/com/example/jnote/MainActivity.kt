@@ -1,10 +1,14 @@
 package com.example.jnote
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jnote.DB.AppDataBase
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +25,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /* 메뉴 */
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+        supportActionBar!!.title = "전체 보기"
+
+        navMenu.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener {item: MenuItem ->
+            when(item!!.itemId) {
+
+            }
+            drawerMenu.closeDrawers()
+            false
+        })
+
+        /* 리스트 및 DB 생성 */
         viewManager = LinearLayoutManager(this)
         db = AppDataBase.getInstance(this)
         CoroutineScope(Dispatchers.IO).launch {
@@ -36,6 +55,18 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.side_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item!!.itemId) {
+            android.R.id.home -> drawerMenu.openDrawer(GravityCompat.START)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {
