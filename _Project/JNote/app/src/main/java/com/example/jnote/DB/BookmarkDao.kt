@@ -30,4 +30,6 @@ interface BookmarkDao {
     @Query("SELECT * FROM bookmark WHERE level = :level")
     fun getListLevel(level: Int): List<Hanja>
 
+    @Query("SELECT COUNT(*) FROM bookmark")
+    fun getCount(): Long
 }
