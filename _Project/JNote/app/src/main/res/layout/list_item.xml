@@ -3,23 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:background="@drawable/list_item"
+    android:orientation="horizontal"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp">
 
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_baseline_star_border_24" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/word"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:gravity="center"
-        android:text="TextView" />
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
+        android:text="T"
+        android:textSize="44sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -28,19 +29,22 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/phonation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/border_bottom"
             android:gravity="center_vertical"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/mean"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>
