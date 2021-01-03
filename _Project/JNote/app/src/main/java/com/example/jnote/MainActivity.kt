@@ -1,9 +1,13 @@
 package com.example.jnote
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,21 +19,35 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+    /* DB */
     private var db: AppDataBase? = null
 
+    /* List */
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
 
+    /* 설정 */
+    lateinit var sharedPref: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        /* Setting */
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE)
 
-        /* 메뉴 */
+        /* DB */
+        db = AppDataBase.getInstance(this)
+        CoroutineScope(Dispatchers.IO).launch {
+            if(db?.hanjaDao()?.getCount() == 0L ) {
+                createDatabase()
+            }
+        }
+
+        /* Menu */
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
-        supportActionBar!!.title = "전체 보기 ()개"
 
         navMenu.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener {item: MenuItem ->
             when(item!!.itemId) {
@@ -46,22 +64,17 @@ class MainActivity : AppCompatActivity() {
             false
         })
 
-        /* DB 생성 및 초기화 */
-        db = AppDataBase.getInstance(this)
-        CoroutineScope(Dispatchers.IO).launch {
-            if(db?.hanjaDao()?.getCount() == 0L ) {
-                createDatabase()
-            }
-        }
-
-        /* 리스트 */
+        /* View & List */
         viewManager = LinearLayoutManager(this)
-        listUpdate(1)
+        viewUpdate(sharedPref.getInt("level", 0))
     }
 
     private fun viewUpdate(level: Int) {
-        titleUpdate(level)
+        sharedPref.edit {
+            putInt("level", level)
+        }
         listUpdate(level)
+        titleUpdate(level)
     }
 
     private fun titleUpdate(level: Int) {
@@ -73,22 +86,36 @@ class MainActivity : AppCompatActivity() {
             }
             CoroutineScope(Dispatchers.Main).launch {
                 supportActionBar!!.title = when(level) {
-                    0 -> "전체 보기 ${count}개"
-                    -1 -> "즐겨 찾기 ${count}개"
-                    else -> "Level $level ${count}개"
+                    0 -> "전체 보기 - ${count}개"
+                    -1 -> "즐겨 찾기 - ${count}개"
+                    else -> "Level $level - ${count}개"
                 }
             }
         }
     }
 
-    private fun listUpdate(level: Int) {
+    private fun btnTextUpdate() {
+        mainBtn1.text = if(sharedPref.getBoolean("mode", true)) "단어 OFF"
+        else "단어 ON"
+        mainBtn2.text = if(sharedPref.getBoolean("mode2", true)) "뜻 OFF"
+        else "뜻 ON"
+    }
+
+    private fun listUpdate(level: Int, shuffle: Boolean = false) {
+        btnTextUpdate()
         CoroutineScope(Dispatchers.IO).launch {
             val levelList = when(level) {
                 0 -> db?.hanjaDao()?.getListAll()
                 -1 -> db?.bookmarkDao()?.getListAll()
                 else -> db?.hanjaDao()?.getListLevel(level)
             }
-            viewAdapter = ListAdapter(levelList)
+
+            viewAdapter = if(shuffle) {
+                ListAdapter(levelList?.shuffled(), sharedPref.getBoolean("mode", true), sharedPref.getBoolean("mode2", true))
+            } else {
+                ListAdapter(levelList, sharedPref.getBoolean("mode", true), sharedPref.getBoolean("mode2", true))
+            }
+
             CoroutineScope(Dispatchers.Main).launch {
                 recyclerView = cycleList.apply {
                     setHasFixedSize(true)
@@ -107,6 +134,28 @@ class MainActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 db?.hanjaDao()?.insertHanja(line[0].toInt(), line[1], line[2], line[3])
             }
+        }
+    }
+
+    fun buttonEvent(view: View) {
+        when(view.id) {
+            R.id.mainBtn1 -> {
+                if(sharedPref.getBoolean("mode", true)) {
+                    sharedPref.edit { putBoolean("mode", false) }
+                } else {
+                    sharedPref.edit { putBoolean("mode", true) }
+                }
+                listUpdate(sharedPref.getInt("level", 0))
+            }
+            R.id.mainBtn2 -> {
+                if(sharedPref.getBoolean("mode2", true)) {
+                    sharedPref.edit { putBoolean("mode2", false) }
+                } else {
+                    sharedPref.edit { putBoolean("mode2", true) }
+                }
+                listUpdate(sharedPref.getInt("level", 0))
+            }
+            R.id.mainBtn3 -> listUpdate(sharedPref.getInt("level", 0), true)
         }
     }
 
