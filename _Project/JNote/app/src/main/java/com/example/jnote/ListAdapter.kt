@@ -1,7 +1,6 @@
 package com.example.jnote
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
@@ -26,8 +25,17 @@ class ListAdapter(private val myData: List<Hanja>?, private val mode: Boolean = 
         holder.layout.phonation.text = myData?.get(position)?.phonation ?: ""
         holder.layout.mean.text = myData?.get(position)?.mean ?: ""
 
-        if(!mode) holder.layout.word.visibility = View.INVISIBLE
-        if(!mode2) holder.layout.phonation.visibility = View.INVISIBLE
+        if(!mode) holder.layout.word.alpha = 0f
+        if(!mode2) holder.layout.phonation.alpha = 0f
+
+        holder.layout.word.setOnClickListener {
+            holder.layout.word.alpha = if(holder.layout.word.alpha == 1f) 0f
+            else 1f
+        }
+        holder.layout.phonation.setOnClickListener {
+            holder.layout.phonation.alpha = if(holder.layout.phonation.alpha == 1f) 0f
+            else 1f
+        }
     }
 
     override fun getItemCount() = myData?.size ?: 0
