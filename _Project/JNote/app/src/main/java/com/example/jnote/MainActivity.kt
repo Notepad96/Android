@@ -12,6 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jnote.DB.AppDataBase
+import com.example.jnote.DB.Hanja
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
@@ -26,9 +27,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
+    private var levelList: List<Hanja>? = null
 
     /* 설정 */
-    lateinit var sharedPref: SharedPreferences
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         /* DB */
         db = AppDataBase.getInstance(this)
         CoroutineScope(Dispatchers.IO).launch {
-            if(db?.hanjaDao()?.getCount() == 0L ) {
+            if (db?.hanjaDao()?.getCount() == 0L) {
                 createDatabase()
             }
         }
@@ -49,8 +51,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
 
-        navMenu.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener {item: MenuItem ->
-            when(item!!.itemId) {
+        navMenu.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item: MenuItem ->
+            when (item!!.itemId) {
                 R.id.showAll -> viewUpdate(0)
                 R.id.showStar -> viewUpdate(-1)
                 R.id.level1 -> viewUpdate(1)
@@ -67,25 +69,28 @@ class MainActivity : AppCompatActivity() {
         /* View & List */
         viewManager = LinearLayoutManager(this)
         viewUpdate(sharedPref.getInt("level", 0))
+
     }
 
     private fun viewUpdate(level: Int) {
         sharedPref.edit {
             putInt("level", level)
         }
-        listUpdate(level)
+        getList(level)
+        Thread.sleep(300L)
         titleUpdate(level)
+        listUpdate(level)
     }
 
     private fun titleUpdate(level: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            var count = when(level) {
+            var count = when (level) {
                 0 -> db?.hanjaDao()?.getCount()
                 -1 -> db?.bookmarkDao()?.getCount()
                 else -> db?.hanjaDao()?.getLevelCount(level)
             }
             CoroutineScope(Dispatchers.Main).launch {
-                supportActionBar!!.title = when(level) {
+                supportActionBar!!.title = when (level) {
                     0 -> "전체 보기 - ${count}개"
                     -1 -> "즐겨 찾기 - ${count}개"
                     else -> "Level $level - ${count}개"
@@ -95,34 +100,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun btnTextUpdate() {
-        mainBtn1.text = if(sharedPref.getBoolean("mode", true)) "단어 OFF"
+        mainBtn1.text = if (sharedPref.getBoolean("mode", true)) "단어 OFF"
         else "단어 ON"
-        mainBtn2.text = if(sharedPref.getBoolean("mode2", true)) "뜻 OFF"
+        mainBtn2.text = if (sharedPref.getBoolean("mode2", true)) "뜻 OFF"
         else "뜻 ON"
     }
 
-    private fun listUpdate(level: Int, shuffle: Boolean = false) {
-        btnTextUpdate()
+    private fun getList(level: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val levelList = when(level) {
+            levelList = when (level) {
                 0 -> db?.hanjaDao()?.getListAll()
                 -1 -> db?.bookmarkDao()?.getListAll()
                 else -> db?.hanjaDao()?.getListLevel(level)
             }
+        }
+    }
 
-            viewAdapter = if(shuffle) {
-                ListAdapter(levelList?.shuffled(), sharedPref.getBoolean("mode", true), sharedPref.getBoolean("mode2", true))
-            } else {
-                ListAdapter(levelList, sharedPref.getBoolean("mode", true), sharedPref.getBoolean("mode2", true))
-            }
+    private fun listUpdate(level: Int, shuffle: Boolean = false) {
+        btnTextUpdate()
+        if (shuffle) {
+            levelList = levelList?.shuffled()
+        }
+        viewAdapter = ListAdapter(levelList, sharedPref.getBoolean("mode", true), sharedPref.getBoolean("mode2", true))
 
-            CoroutineScope(Dispatchers.Main).launch {
-                recyclerView = cycleList.apply {
-                    setHasFixedSize(true)
-                    layoutManager = viewManager
-                    adapter = viewAdapter
-                }
-            }
+        recyclerView = cycleList.apply {
+            adapter = viewAdapter
+            layoutManager = viewManager
+            setHasFixedSize(true)
         }
     }
 
@@ -138,22 +142,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun buttonEvent(view: View) {
-        when(view.id) {
+        when (view.id) {
             R.id.mainBtn1 -> {
-                if(sharedPref.getBoolean("mode", true)) {
+                if (sharedPref.getBoolean("mode", true)) {
                     sharedPref.edit { putBoolean("mode", false) }
                 } else {
                     sharedPref.edit { putBoolean("mode", true) }
                 }
-                listUpdate(sharedPref.getInt("level", 0))
+                listUpdate(sharedPref.getInt("level", 0), false)
             }
             R.id.mainBtn2 -> {
-                if(sharedPref.getBoolean("mode2", true)) {
+                if (sharedPref.getBoolean("mode2", true)) {
                     sharedPref.edit { putBoolean("mode2", false) }
                 } else {
                     sharedPref.edit { putBoolean("mode2", true) }
                 }
-                listUpdate(sharedPref.getInt("level", 0))
+                listUpdate(sharedPref.getInt("level", 0), false)
             }
             R.id.mainBtn3 -> listUpdate(sharedPref.getInt("level", 0), true)
         }
@@ -165,7 +169,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item!!.itemId) {
+        when (item!!.itemId) {
             android.R.id.home -> drawerMenu.openDrawer(GravityCompat.START)
         }
         return super.onOptionsItemSelected(item)
