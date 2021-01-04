@@ -11,4 +11,10 @@
     <color name="firstColor">#7b9acc</color>
     <color name="firstColorVariant">#356fcc</color>
     <color name="firstOnColor">#FCF6F5</color>
+
+    <color name="darkFirstColor">#101820</color>
+    <color name="darkFirstColorVariant">#1C3257</color>
+    <color name="darkFirstOnColor">#F2AA4C</color>
+    <color name="darkBackgroundColor">#101820</color>
+
 </resources>

@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewManager: RecyclerView.LayoutManager
     private var levelList: List<Hanja>? = null
 
-    /* 설정 */
+    /* Setting */
     private lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
