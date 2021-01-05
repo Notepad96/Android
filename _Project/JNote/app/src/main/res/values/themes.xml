@@ -26,10 +26,15 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/darkFirstColorVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@color/darkBackgroundColor</item>
+        <item name="android:windowBackground">@color/darkFirstColor</item>
+
         <item name="android:textColorPrimary">@color/darkFirstOnColor</item>
         <item name="android:textColorSecondary">@color/darkFirstOnColor</item>
-        <item name="colorPrimarySurface">@color/darkFirstOnColor</item>
         <item name="android:textColor">@color/darkFirstOnColor</item>
+
+        <item name="mainBtnLayout">@drawable/border_top_background</item>
+        <item name="mainBtn">@style/darkMainBtn</item>
+
     </style>
+
 </resources>

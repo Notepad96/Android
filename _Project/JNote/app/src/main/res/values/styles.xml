@@ -2,4 +2,11 @@
 <resources>
     <style name="mainBtn" parent="Widget.MaterialComponents.Button.TextButton"/>
 
+
+    <style name="darkMainBtn" parent="Widget.MaterialComponents.Button.UnelevatedButton" >
+        <item name="android:backgroundTint">@color/darkFirstColorVariant</item>
+        <item name="android:textColor">@color/darkFirstOnColor</item>
+    </style>
+
+
 </resources>
