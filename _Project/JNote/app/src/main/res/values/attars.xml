@@ -2,4 +2,5 @@
 <resources>
     <attr name="mainBtnLayout" format="reference" />
     <attr name="mainBtn" format="reference" />
+    <attr name="themeToggle" format="reference" />
 </resources>

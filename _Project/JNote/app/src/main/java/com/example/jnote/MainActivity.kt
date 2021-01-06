@@ -1,6 +1,7 @@
 package com.example.jnote
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
@@ -33,10 +34,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         /* Setting */
         sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+        if(sharedPref.getBoolean("theme", false)) {
+            setTheme(R.style.darkTheme)
+        } else {
+            setTheme(R.style.lightTheme)
+        }
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
         /* DB */
         db = AppDataBase.getInstance(this)
@@ -49,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         /* Menu */
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
 
         navMenu.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item: MenuItem ->
             when (item!!.itemId) {
@@ -163,6 +168,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun reload() {
+        var intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        this.finish()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.side_menu, menu)
         return true
@@ -171,6 +182,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item!!.itemId) {
             android.R.id.home -> drawerMenu.openDrawer(GravityCompat.START)
+            R.id.themeToggle -> {
+                sharedPref.edit {
+                    putBoolean("theme", !sharedPref.getBoolean("theme", false))
+                }
+                reload()
+            }
         }
         return super.onOptionsItemSelected(item)
     }

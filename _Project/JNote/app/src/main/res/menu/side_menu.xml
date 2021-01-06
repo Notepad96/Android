@@ -4,7 +4,8 @@
 
     <item
         android:id="@+id/themeToggle"
-        android:icon="@drawable/ic_baseline_wb_sunny_24"
-        app:showAsAction="always" />
+        android:icon="?attr/themeToggle"
+        app:showAsAction="always"
+        android:title="Toggle" />
     <item android:title="Item" />
 </menu>

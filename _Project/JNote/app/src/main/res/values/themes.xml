@@ -12,6 +12,15 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <item name="android:textColorPrimary">@color/darkFirstColorVariant</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+
+        <item name="mainBtnLayout">@drawable/border_top</item>
+        <item name="mainBtn">@style/mainBtn</item>
+        <item name="themeToggle">@drawable/ic_baseline_nights_stay_24</item>
+        <item name="homeAsUpIndicator">@drawable/ic_baseline_menu_24</item>
     </style>
 
     <style name="AppDarkTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -34,7 +43,8 @@
 
         <item name="mainBtnLayout">@drawable/border_top_background</item>
         <item name="mainBtn">@style/darkMainBtn</item>
-
+        <item name="themeToggle">@drawable/ic_baseline_wb_sunny_24</item>
+        <item name="homeAsUpIndicator">@drawable/ic_baseline_menu_24_2</item>
     </style>
 
 </resources>
