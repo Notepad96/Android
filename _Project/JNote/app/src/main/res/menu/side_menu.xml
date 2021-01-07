@@ -7,5 +7,5 @@
         android:icon="?attr/themeToggle"
         app:showAsAction="always"
         android:title="Toggle" />
-    <item android:title="Item" />
+
 </menu>

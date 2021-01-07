@@ -10,7 +10,7 @@
             <item
                 android:id="@+id/showStar"
                 android:icon="@drawable/ic_baseline_star_border_24"
-                android:title="즐겨 찾기" />
+                android:title="단어장" />
         </menu>
     </item>
     <item android:title="Level">

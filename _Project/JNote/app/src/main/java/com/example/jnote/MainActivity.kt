@@ -74,7 +74,6 @@ class MainActivity : AppCompatActivity() {
         /* View & List */
         viewManager = LinearLayoutManager(this)
         viewUpdate(sharedPref.getInt("level", 0))
-
     }
 
     private fun viewUpdate(level: Int) {
@@ -97,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 supportActionBar!!.title = when (level) {
                     0 -> "전체 보기 - ${count}개"
-                    -1 -> "즐겨 찾기 - ${count}개"
+                    -1 -> "단어장"
                     else -> "Level $level - ${count}개"
                 }
             }
@@ -126,7 +125,12 @@ class MainActivity : AppCompatActivity() {
         if (shuffle) {
             levelList = levelList?.shuffled()
         }
-        viewAdapter = ListAdapter(levelList, sharedPref.getBoolean("mode", true), sharedPref.getBoolean("mode2", true))
+
+        if(level == -1) {
+            viewAdapter = ListAdapter(this, levelList?.toMutableList(), sharedPref.getBoolean("mode", true), sharedPref.getBoolean("mode2", true), true)
+        } else {
+            viewAdapter = ListAdapter(this, levelList?.toMutableList(), sharedPref.getBoolean("mode", true), sharedPref.getBoolean("mode2", true))
+        }
 
         recyclerView = cycleList.apply {
             adapter = viewAdapter

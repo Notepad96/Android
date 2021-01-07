@@ -23,6 +23,8 @@
         <item name="themeToggle">@drawable/ic_baseline_nights_stay_24</item>
         <item name="homeAsUpIndicator">@drawable/ic_baseline_menu_24</item>
 
+        <item name="android:itemBackground">@color/firstColor</item>
+
         <!-- DrawLayout -->
         <item name="drawIconColor">@color/firstColorVariant</item>
         <item name="drawBackground">@color/firstOnColor</item>
@@ -53,10 +55,13 @@
         <item name="themeToggle">@drawable/ic_baseline_wb_sunny_24</item>
         <item name="homeAsUpIndicator">@drawable/ic_baseline_menu_24_2</item>
 
+        <item name="android:itemBackground">@color/darkFirstOnColor</item>
+
         <!-- DrawLayout -->
         <item name="drawIconColor">@color/darkFirstOnColor</item>
         <item name="drawBackground">@color/darkFirstColorVariant</item>
         <item name="drawTextColor">@color/white</item>
+
     </style>
 
 </resources>
