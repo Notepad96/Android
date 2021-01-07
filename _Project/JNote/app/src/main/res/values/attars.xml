@@ -3,4 +3,10 @@
     <attr name="mainBtnLayout" format="reference" />
     <attr name="mainBtn" format="reference" />
     <attr name="themeToggle" format="reference" />
+
+
+    <attr name="drawBackground" format="reference" />
+    <attr name="drawTextColor" format="reference" />
+    <attr name="drawIconColor" format="reference" />
+
 </resources>

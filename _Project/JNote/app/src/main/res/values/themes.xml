@@ -14,13 +14,19 @@
         <!-- Customize your theme here. -->
 
         <item name="android:textColorPrimary">@color/darkFirstColorVariant</item>
-        <item name="android:textColorSecondary">@color/black</item>
+        <item name="android:textColorSecondary">@color/darkFirstColorVariant</item>
         <item name="android:textColor">@color/black</item>
 
-        <item name="mainBtnLayout">@drawable/border_top</item>
+        <!-- UI Style -->
+        <item name="mainBtnLayout">@drawable/border_top_light_background</item>
         <item name="mainBtn">@style/mainBtn</item>
         <item name="themeToggle">@drawable/ic_baseline_nights_stay_24</item>
         <item name="homeAsUpIndicator">@drawable/ic_baseline_menu_24</item>
+
+        <!-- DrawLayout -->
+        <item name="drawIconColor">@color/firstColorVariant</item>
+        <item name="drawBackground">@color/firstOnColor</item>
+        <item name="drawTextColor">@color/black</item>
     </style>
 
     <style name="AppDarkTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -39,12 +45,18 @@
 
         <item name="android:textColorPrimary">@color/darkFirstOnColor</item>
         <item name="android:textColorSecondary">@color/darkFirstOnColor</item>
-        <item name="android:textColor">@color/darkFirstOnColor</item>
+        <item name="android:textColor">@color/white</item>
 
-        <item name="mainBtnLayout">@drawable/border_top_background</item>
+        <!-- UI Style -->
+        <item name="mainBtnLayout">@drawable/border_top_dark_background</item>
         <item name="mainBtn">@style/darkMainBtn</item>
         <item name="themeToggle">@drawable/ic_baseline_wb_sunny_24</item>
         <item name="homeAsUpIndicator">@drawable/ic_baseline_menu_24_2</item>
+
+        <!-- DrawLayout -->
+        <item name="drawIconColor">@color/darkFirstOnColor</item>
+        <item name="drawBackground">@color/darkFirstColorVariant</item>
+        <item name="drawTextColor">@color/white</item>
     </style>
 
 </resources>

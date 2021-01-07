@@ -75,7 +75,11 @@
         android:id="@+id/navMenu"
         android:layout_gravity="start"
         app:menu="@menu/navi_menu"
-        app:itemIconTint="@color/firstColorVariant"
+        app:itemTextAppearance="?android:attr/textAppearanceMedium"
+
+        app:itemIconTint="?attr/drawIconColor"
+        android:background="?attr/drawBackground"
+        app:itemTextColor="?attr/drawTextColor"
         />
 
 </androidx.drawerlayout.widget.DrawerLayout>

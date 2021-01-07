@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="mainBtn" parent="Widget.MaterialComponents.Button.TextButton"/>
+    <style name="mainBtn" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:backgroundTint">@color/firstColorVariant</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 
 
     <style name="darkMainBtn" parent="Widget.MaterialComponents.Button.UnelevatedButton" >
