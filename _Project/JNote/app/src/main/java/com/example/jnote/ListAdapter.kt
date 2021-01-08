@@ -1,12 +1,13 @@
 package com.example.jnote
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.PopupMenu
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jnote.DB.AppDataBase
 import com.example.jnote.DB.Hanja
@@ -46,14 +47,22 @@ class ListAdapter(private val context: Context, private val myData: MutableList<
             holder.layout.item_layout.setOnClickListener {
                 val popMenu: PopupMenu = PopupMenu(holder.layout.context, holder.layout)
                 popMenu.inflate(R.menu.popup_menu2)
-                popMenu.setOnMenuItemClickListener {
-                    Toast.makeText(context, "$position", Toast.LENGTH_SHORT).show()
-                    CoroutineScope(Dispatchers.IO).launch {
-                        myData?.removeAt(position)
-                        db?.bookmarkDao()?.deleteHanja(myData!!.get(position).id)
+                popMenu.setOnMenuItemClickListener {item ->
+                    when(item.itemId) {
+                        R.id.removeBook -> {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                myData?.removeAt(position)
+                                db?.bookmarkDao()?.deleteHanja(myData!!.get(position).id)
+                            }
+                            notifyDataSetChanged()
+                            notifyItemRemoved(position)
+                        }
+                        R.id.bookSearch -> {
+                            val intent = Intent(holder.layout.context, WebActivity::class.java)
+                            intent.putExtra("word", word)
+                            ContextCompat.startActivity(holder.layout.context, intent, null)
+                        }
                     }
-                    notifyDataSetChanged()
-                    notifyItemRemoved(position)
                     true
                 }
                 popMenu.show()
@@ -92,10 +101,8 @@ class ListAdapter(private val context: Context, private val myData: MutableList<
             holder.layout.phonation.alpha = if(holder.layout.phonation.alpha == 1f) 0f
             else 1f
         }
-
     }
 
-
-
     override fun getItemCount() = myData?.size ?: 0
+
 }

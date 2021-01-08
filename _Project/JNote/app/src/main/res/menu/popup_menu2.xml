@@ -4,4 +4,7 @@
     <item
         android:id="@+id/removeBook"
         android:title="단어장에서 제거" />
+    <item
+        android:id="@+id/bookSearch"
+        android:title="검색" />
 </menu>
