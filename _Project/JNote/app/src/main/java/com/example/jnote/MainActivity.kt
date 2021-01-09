@@ -1,6 +1,5 @@
 package com.example.jnote
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         /* Setting */
-        sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+        sharedPref = getSharedPreferences("setting", MODE_PRIVATE)
         if(sharedPref.getBoolean("theme", false)) {
             setTheme(R.style.darkTheme)
         } else {
@@ -80,8 +79,6 @@ class MainActivity : AppCompatActivity() {
         sharedPref.edit {
             putInt("level", level)
         }
-        getList(level)
-        Thread.sleep(300L)
         titleUpdate(level)
         listUpdate(level)
     }
@@ -121,7 +118,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun listUpdate(level: Int, shuffle: Boolean = false) {
+        getList(level)
         btnTextUpdate()
+        Thread.sleep(300L)
         if (shuffle) {
             levelList = levelList?.shuffled()
         }

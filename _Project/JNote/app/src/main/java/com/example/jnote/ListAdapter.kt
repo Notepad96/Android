@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jnote.DB.AppDataBase
 import com.example.jnote.DB.Hanja
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.list_item.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -50,12 +51,15 @@ class ListAdapter(private val context: Context, private val myData: MutableList<
                 popMenu.setOnMenuItemClickListener {item ->
                     when(item.itemId) {
                         R.id.removeBook -> {
+                            Snackbar.make(holder.layout, "단어가 삭제되었습니다.", Snackbar.LENGTH_LONG).show()
                             CoroutineScope(Dispatchers.IO).launch {
-                                myData?.removeAt(position)
                                 db?.bookmarkDao()?.deleteHanja(myData!!.get(position).id)
                             }
-                            notifyDataSetChanged()
+                            Thread.sleep(300L)
+                            notifyItemRangeChanged(position, myData!!.size ?: 0)
+                            myData?.removeAt(position)
                             notifyItemRemoved(position)
+                            // notifyDataSetChanged()
                         }
                         R.id.bookSearch -> {
                             val intent = Intent(holder.layout.context, WebActivity::class.java)
@@ -74,9 +78,19 @@ class ListAdapter(private val context: Context, private val myData: MutableList<
             holder.layout.item_layout.setOnClickListener {
                 val popMenu: PopupMenu = PopupMenu(holder.layout.context, holder.layout)
                 popMenu.inflate(R.menu.popup_menu)
-                popMenu.setOnMenuItemClickListener {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        db?.bookmarkDao()?.insertHanja(level, word, phonation, mean)
+                popMenu.setOnMenuItemClickListener {item ->
+                    when(item.itemId) {
+                        R.id.addBook -> {
+                            Snackbar.make(holder.layout, "단어장에 추가되었습니다.", Snackbar.LENGTH_LONG).show()
+                            CoroutineScope(Dispatchers.IO).launch {
+                                db?.bookmarkDao()?.insertHanja(level, word, phonation, mean)
+                            }
+                        }
+                        R.id.bookSearch -> {
+                            val intent = Intent(holder.layout.context, WebActivity::class.java)
+                            intent.putExtra("word", word)
+                            ContextCompat.startActivity(holder.layout.context, intent, null)
+                        }
                     }
                     true
                 }
