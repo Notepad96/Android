@@ -15,7 +15,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+        sharedPref = getSharedPreferences("setting", MODE_PRIVATE)
+        // sharedPref = this.getPreferences(Context.MODE_PRIVATE) // 해당 엑티비티에서만
         textView.text = sharedPref.getString("opt1", null)  // (Key, Default Value)
     }
 
