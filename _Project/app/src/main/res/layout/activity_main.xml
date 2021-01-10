@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="2dp"
-                    android:text="Text Size : 10"
+                    android:text="Size : 10"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="clear"
-                    android:text="Clear"
+                    android:text="초기화"
                     android:textSize="14sp" />
 
 
@@ -80,7 +80,8 @@
                     android:textSize="14sp" />
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:id="@+id/eraseBtn"
+                    android:layout_width="125dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="erase"
@@ -90,13 +91,14 @@
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/colorSelectBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
-            android:backgroundTint="#000000"
+            android:layout_marginRight="5dp"
             android:clickable="true"
-            android:onClick="colorSelect" />
+            android:onClick="colorSelect"
+            app:backgroundTint="@color/black" />
     </LinearLayout>
 </LinearLayout>
