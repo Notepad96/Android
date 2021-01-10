@@ -9,7 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 
 class DrawingBoard(context: Context) : View(context) {
-    var paint = Paint()
+    var paint = Paint(Paint.ANTI_ALIAS_FLAG)
     var path = Path()
     private var xx = 0F
     private var yy = 0F
@@ -18,6 +18,9 @@ class DrawingBoard(context: Context) : View(context) {
         paint.color = Color.BLACK
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = 10F
+
+        paint.strokeJoin = Paint.Join.ROUND
+        paint.strokeCap = Paint.Cap.ROUND
     }
 
     override fun onDraw(canvas: Canvas?) {
