@@ -62,7 +62,6 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
         ColorPickerDialog.newBuilder()
             .setColor(pb.color)
             .setShowAlphaSlider(true)
-            .setDialogType(ColorPickerDialog.TYPE_CUSTOM)
             .show(this)
     }
     override fun onColorSelected(dialogId: Int, color: Int) {
