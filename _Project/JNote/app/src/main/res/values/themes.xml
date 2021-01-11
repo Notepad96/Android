@@ -29,6 +29,10 @@
         <item name="drawIconColor">@color/firstColorVariant</item>
         <item name="drawBackground">@color/firstOnColor</item>
         <item name="drawTextColor">@color/black</item>
+
+        <!-- Quiz Layout -->
+        <item name="plusBtnBackColor">@color/firstColorVariant</item>
+        <item name="plusBtnTintColor">@color/darkFirstColorVariant</item>
     </style>
 
     <style name="AppDarkTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -62,6 +66,9 @@
         <item name="drawBackground">@color/darkFirstColorVariant</item>
         <item name="drawTextColor">@color/white</item>
 
+        <!-- Quiz Layout -->
+        <item name="plusBtnBackColor">@color/darkFirstOnColor</item>
+        <item name="plusBtnTintColor">@color/white</item>
     </style>
 
 </resources>

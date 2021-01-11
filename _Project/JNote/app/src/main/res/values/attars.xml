@@ -4,9 +4,11 @@
     <attr name="mainBtn" format="reference" />
     <attr name="themeToggle" format="reference" />
 
-
     <attr name="drawBackground" format="reference" />
     <attr name="drawTextColor" format="reference" />
     <attr name="drawIconColor" format="reference" />
+
+    <attr name="plusBtnBackColor" format="reference" />
+    <attr name="plusBtnTintColor" format="reference" />
 
 </resources>
