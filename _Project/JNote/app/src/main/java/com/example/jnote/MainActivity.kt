@@ -3,6 +3,7 @@ package com.example.jnote
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -168,6 +169,14 @@ class MainActivity : AppCompatActivity() {
                 listUpdate(sharedPref.getInt("level", 0), false)
             }
             R.id.mainBtn3 -> listUpdate(sharedPref.getInt("level", 0), true)
+            R.id.mainBtn4 -> {
+                val intent = Intent(this, QuizActivity::class.java)
+                var temp: ArrayList<Parcelable> = arrayListOf()
+                levelList?.let { temp.addAll(it) }
+                intent.putParcelableArrayListExtra("quizList", temp)
+
+                startActivity(intent)
+            }
         }
     }
 
