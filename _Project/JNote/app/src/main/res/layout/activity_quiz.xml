@@ -18,15 +18,31 @@
         android:textSize="128sp"
         android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/quizPhonation"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/list_item"
-        android:gravity="center"
-        android:text="TextView"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/quizCount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="10 / 10"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/quizPhonation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="TextView"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/drawBoard"
@@ -65,7 +81,9 @@
             android:onClick="next"
             android:text="정 답"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            style="?attr/mainBtn"
+            />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"

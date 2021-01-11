@@ -1,8 +1,10 @@
 package com.example.jnote
 
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.jnote.DB.Hanja
 import kotlinx.android.synthetic.main.activity_quiz.*
@@ -29,6 +31,7 @@ class QuizActivity : AppCompatActivity() {
         quizList = intent.getSerializableExtra("quizList") as List<Hanja>
         quizList = quizList.shuffled()
 
+        quizCount.text = "${position+1} / ${quizList.size}"
         quizPhonation.text = quizList[position].phonation
     }
 
@@ -42,10 +45,20 @@ class QuizActivity : AppCompatActivity() {
                 position++
             }
             1 -> {
-                status = 0
-                quizBtn.text = "정 답"
-                quizWord.visibility = View.GONE
-                quizPhonation.text = quizList[position].phonation
+                if(position == quizList.size) {
+                    AlertDialog.Builder(this, R.style.AlertDialog).apply {
+                        setTitle("퀴즈가 종료되었습니다.")
+                        setPositiveButton("완료", DialogInterface.OnClickListener { dialog, which ->
+                            finish()
+                        })
+                    }.show()
+                } else {
+                    status = 0
+                    quizBtn.text = "정 답"
+                    quizCount.text = "${position+1} / ${quizList.size}"
+                    quizWord.visibility = View.GONE
+                    quizPhonation.text = quizList[position].phonation
+                }
             }
         }
     }
