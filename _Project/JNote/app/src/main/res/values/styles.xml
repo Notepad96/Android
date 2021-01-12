@@ -19,7 +19,18 @@
         <item name="android:windowMinWidthMinor">@dimen/dialog_width</item>
     </style>
 
+    <style name="AlertDialog2" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+        <item name="buttonBarPositiveButtonStyle">@style/positiveBtn</item>
+        <item name="buttonBarNegativeButtonStyle">@style/negativeBtn</item>
+        <item name="android:windowMinWidthMinor">@dimen/dialog_width</item>
+    </style>
+
     <style name="positiveBtn" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="negativeBtn" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/black</item>
     </style>
     <item name="dialog_width" type="dimen">90%</item>
