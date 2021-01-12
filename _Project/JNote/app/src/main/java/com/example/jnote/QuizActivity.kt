@@ -6,12 +6,19 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.jnote.DB.AppDataBase
 import com.example.jnote.DB.Hanja
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_quiz.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class QuizActivity : AppCompatActivity() {
     var position = 0
     var status = 0
+    var color = true
+    private var db: AppDataBase? = null
 
     lateinit var quizList: List<Hanja>
     /* Setting */
@@ -27,12 +34,31 @@ class QuizActivity : AppCompatActivity() {
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
-        // quizList = intent.getParcelableArrayExtra<Hanja>("quizList")
+
+        db = AppDataBase.getInstance(this)
+        drawBoard.addView(PaintBoard(this))
+
         quizList = intent.getSerializableExtra("quizList") as List<Hanja>
         quizList = quizList.shuffled()
 
         quizCount.text = "${position+1} / ${quizList.size}"
         quizPhonation.text = quizList[position].phonation
+    }
+
+    fun changeColor(view: View) {
+        if(color) {
+
+        }
+    }
+
+    fun addBookmark(view: View) {
+        Snackbar.make(view, "단어장에 추가되었습니다.", Snackbar.LENGTH_LONG).show()
+        CoroutineScope(Dispatchers.IO).launch {
+            db?.bookmarkDao()?.insertHanja(quizList[position].level,
+                    quizList[position].word ?: "",
+                    quizList[position].phonation ?: "",
+                    quizList[position].mean ?: "")
+        }
     }
 
     fun next(view: View) {
