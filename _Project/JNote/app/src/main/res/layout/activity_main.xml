@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="buttonEvent"
-                android:text="단어 Off"
+                android:text="@string/mainBtn1"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="buttonEvent"
-                android:text="뜻 OFF"
+                android:text="@string/mainBtn2"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="buttonEvent"
-                android:text="Shuffle"
+                android:text="@string/mainBtn3"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -75,7 +75,7 @@
                 android:onClick="buttonEvent"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:text="Quiz" />
+                android:text="@string/mainBtn4" />
         </LinearLayout>
 
     </LinearLayout>
