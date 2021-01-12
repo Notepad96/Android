@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
     private var levelList: List<Hanja>? = null
+    private var beforeLevel = -2
 
     /* Setting */
     private lateinit var sharedPref: SharedPreferences
@@ -119,7 +120,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun listUpdate(level: Int, shuffle: Boolean = false) {
-        getList(level)
+        if(beforeLevel != level) {
+            getList(level)
+            beforeLevel = level
+        }
         btnTextUpdate()
         Thread.sleep(300L)
         if (shuffle) {
