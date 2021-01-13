@@ -44,6 +44,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="2dp"
                     android:text="Size : 10"
+                    android:textColor="#000000"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 

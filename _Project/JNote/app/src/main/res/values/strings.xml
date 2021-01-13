@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">HanjaNote</string>
+    <string name="app_name">한자노트</string>
     <string name="mainBtn1">단어 Off</string>
     <string name="mainBtn2">뜻 OFF</string>
     <string name="mainBtn3">Shuffle</string>
     <string name="mainBtn4">Quiz</string>
-
 
 </resources>
