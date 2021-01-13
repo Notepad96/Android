@@ -6,7 +6,7 @@
     </style>
 
 
-    <style name="darkMainBtn" parent="Widget.MaterialComponents.Button.UnelevatedButton" >
+    <style name="darkMainBtn" parent="Widget.MaterialComponents.Button.TextButton" >
         <item name="android:backgroundTint">@color/darkFirstColorVariant</item>
         <item name="android:textColor">@color/darkFirstOnColor</item>
     </style>

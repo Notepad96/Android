@@ -1,13 +1,18 @@
 package com.example.jnote
 
+import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +38,9 @@ class MainActivity : AppCompatActivity() {
 
     /* Setting */
     private lateinit var sharedPref: SharedPreferences
+    private val requiredPermissions = arrayOf(
+            Manifest.permission.INTERNET
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         /* Setting */
@@ -44,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        checkPermissions()
 
         /* DB */
         db = AppDataBase.getInstance(this)
@@ -75,6 +84,50 @@ class MainActivity : AppCompatActivity() {
         /* View & List */
         viewManager = LinearLayoutManager(this)
         viewUpdate(sharedPref.getInt("level", 0))
+
+    }
+
+    private fun checkPermissions() {
+        var reject = mutableListOf<String>()
+
+        for(permission in requiredPermissions) {
+            if(ContextCompat.checkSelfPermission(this, permission) !==
+                    PackageManager.PERMISSION_GRANTED) {
+                reject.add(permission)
+            }
+        }
+
+        if(reject.isNotEmpty()) {
+            for (permission in reject) {
+                ActivityCompat.requestPermissions(this, reject.toTypedArray(), 111)
+            }
+        }
+
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode) {
+            111 -> {
+                if(grantResults.isNotEmpty()) {
+                    for((i, permission) in permissions.withIndex()) {
+                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    var preTime: Long = 0
+    override fun onBackPressed() {
+        val temp = System.currentTimeMillis()
+        if(temp - preTime >= 3500L) {
+            preTime = temp
+            Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_LONG).show()
+        } else {
+            super.onBackPressed()
+        }
     }
 
     private fun viewUpdate(level: Int) {
@@ -125,7 +178,7 @@ class MainActivity : AppCompatActivity() {
             beforeLevel = level
         }
         btnTextUpdate()
-        Thread.sleep(300L)
+        Thread.sleep(1000L)
         if (shuffle) {
             levelList = levelList?.shuffled()
         }

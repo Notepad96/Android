@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="buttonEvent"
+                android:singleLine="true"
                 android:text="@string/mainBtn1"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="buttonEvent"
+                android:singleLine="true"
                 android:text="@string/mainBtn2"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -62,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="buttonEvent"
+                android:singleLine="true"
                 android:text="@string/mainBtn3"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -73,9 +76,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="buttonEvent"
+                android:singleLine="true"
+                android:text="@string/mainBtn4"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="@string/mainBtn4" />
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>
