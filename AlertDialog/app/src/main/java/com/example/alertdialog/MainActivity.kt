@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import kotlinx.android.synthetic.main.custom_dialog.*
+import kotlinx.android.synthetic.main.custom_dialog.view.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +30,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun cuDialog(view: View) {
+        val myLayout = layoutInflater.inflate(R.layout.custom_dialog, null)
+        val build = AlertDialog.Builder(view.context).apply {
+            setView(myLayout)
+        }
+        val dialog = build.create()
+        dialog.show()
+
+        myLayout.okBtn.setOnClickListener {
+            Toast.makeText(view.context, "OK Button Click", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+        myLayout.cancelBtn.setOnClickListener {
+            Toast.makeText(view.context, "Cancel Button Click", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
 
     }
 }
