@@ -2,14 +2,19 @@ package com.example.viewcapture
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 import java.io.FileOutputStream
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,29 +23,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun capture(view: View) {
-        val capture = getBitmapFromView(mainLayout)
+        var capture = getBitmapFromView(mainLayout, Color.GREEN)
 
-        imageView.setImageBitmap(capture)
+        var storage = cacheDir
+        var fileName = SimpleDateFormat("yyMMdd_HHmmss").format(Date()) + ".jpg"
+        var imgFile = File(storage, fileName)
+        try {
+            imgFile.createNewFile()
+            var out = FileOutputStream(imgFile)
+            capture!!.compress(Bitmap.CompressFormat.JPEG, 10, out)
+            out.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
-        var folderPath = Environment.getExternalStorageDirectory().absolutePath + "capture"
-        val folder = File(folderPath)
-        if(folder.exists()) folder.mkdirs()
-
-        var filePath = folderPath +  "/" + System.currentTimeMillis() + ".png"
-        val file = File(filePath)
-        Toast.makeText(this, "$filePath", Toast.LENGTH_SHORT).show()
-        //capture?.compress(Bitmap.CompressFormat.PNG, 100, FileOutputStream(file))
+        Toast.makeText(this, "${storage}/${fileName}", Toast.LENGTH_SHORT).show()
+        Glide.with(this)
+                .load(imgFile)
+                .into(imageView)
     }
 
-    open fun getBitmapFromView(view: View): Bitmap? {
-        var bitmap =
-            Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
-        var canvas = Canvas(bitmap)
-        view.draw(canvas)
-        return bitmap
-    }
 
-    open fun getBitmapFromView(view: View, defaultColor: Int): Bitmap? {
+    private fun getBitmapFromView(view: View, defaultColor: Int = Color.WHITE): Bitmap? {
         var bitmap =
             Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         var canvas = Canvas(bitmap)
