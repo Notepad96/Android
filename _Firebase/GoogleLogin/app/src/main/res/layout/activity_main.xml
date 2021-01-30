@@ -6,15 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.gms.common.SignInButton
+    <!-- com.google.android.gms.common.SignInButton -->
+    <Button
         android:id="@+id/signBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="로 그 인"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/textView2"
@@ -22,22 +25,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="208dp"
         android:gravity="center"
-        android:text="Test"
+        android:text="로그인 페이지"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signBtn" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/signBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
