@@ -11,6 +11,13 @@ class MainActivity2 : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.up_from, R.anim.up_to)
+        // 1.
+        // overridePendingTransition(R.anim.up_from, R.anim.up_to)
+
+        // 2.
+        // overridePendingTransition(R.anim.down_from, R.anim.down_to)
+
+        // 3.
+        overridePendingTransition(R.anim.fade_out, R.anim.fade_in)
     }
 }
