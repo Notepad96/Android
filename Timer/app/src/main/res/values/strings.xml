@@ -5,4 +5,7 @@
     <string name="reset">초 기 화</string>
     <string name="record">기 록</string>
 
+    <string name="header1">구간</string>
+    <string name="header2">구간간격</string>
+    <string name="header3">전체 시간</string>
 </resources>

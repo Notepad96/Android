@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.concurrent.timer
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +17,11 @@ class MainActivity : AppCompatActivity() {
     var isRecord = false
     var timerObj: Timer? = null
     var lap = 1
+
+    var timeData: ArrayList<TimeRecord> = arrayListOf()
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +40,14 @@ class MainActivity : AppCompatActivity() {
                 false -> reset()
             }
         }
+
+        viewManager = LinearLayoutManager(this)
+        viewAdapter = MyAdapter(timeData)
+        recyclerView = timeList.apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = viewAdapter
+        }
     }
 
     private fun start() {
@@ -43,9 +59,9 @@ class MainActivity : AppCompatActivity() {
 
         timerObj = timer(period = 10) {
             time++
-            val min = time / 6000
-            val sec = (time / 100) % 60
-            val milli = time % 100
+            val min = getMin()
+            val sec = getSec()
+            val milli = getMilli()
             runOnUiThread {
                 minuteTime.text = if(min < 10) "0$min" else "$min"
                 secondTime.text = if(sec < 10) "0$sec" else "$sec"
@@ -64,22 +80,38 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun record() {
-        val str = "$lap - ${minuteTime.text}:${secondTime.text}:${milliTime.text}"
-        timeLap.text = timeLap.text.toString() + "\n" + str
+        header.visibility = View.VISIBLE
+        val before = if(timeData.isEmpty()) 0 else timeData.last().allTime
+        timeData.add(TimeRecord(lap, time - before , time))
+        recyclerView.smoothScrollToPosition(timeData.size - 1)
+        recyclerView.invalidate()
         lap++
     }
 
     private fun reset() {
         recordBtn.visibility = View.GONE
         isRecord = false
+        timeData?.clear()
+        header.visibility = View.GONE
 
-        timeLap.text = ""
         minuteTime.text = "00"
         secondTime.text = "00"
         milliTime.text = "00"
         time = 0
         lap = 1
         timerObj?.cancel()
+    }
+
+    private fun getMin(): Int {
+        return time / 6000
+    }
+
+    private fun getSec(): Int {
+        return (time / 100) % 60
+    }
+
+    private fun getMilli(): Int {
+        return time % 100
     }
 
 }
