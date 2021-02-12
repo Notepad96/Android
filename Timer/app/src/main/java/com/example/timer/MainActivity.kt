@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         recordBtn.setOnClickListener {
             when(isRecord) {
                 true -> record()
-                false -> init()
+                false -> reset()
             }
         }
     }
@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         recordBtn.visibility = View.VISIBLE
         startBtn.text = resources.getString(R.string.pause)
         startBtn.setBackgroundResource(R.drawable.btn_stop)
+        isRecord = true
+        recordBtn.text = resources.getString(R.string.record)
 
         timerObj = timer(period = 10) {
             time++
@@ -55,16 +57,29 @@ class MainActivity : AppCompatActivity() {
     private fun pause() {
         startBtn.text = resources.getString(R.string.start)
         startBtn.setBackgroundResource(R.drawable.btn_start)
+        isRecord = false
+        recordBtn.text = resources.getString(R.string.reset)
 
         timerObj?.cancel()
     }
 
     private fun record() {
-
+        val str = "$lap - ${minuteTime.text}:${secondTime.text}:${milliTime.text}"
+        timeLap.text = timeLap.text.toString() + "\n" + str
+        lap++
     }
 
-    private fun init() {
+    private fun reset() {
+        recordBtn.visibility = View.GONE
+        isRecord = false
 
+        timeLap.text = ""
+        minuteTime.text = "00"
+        secondTime.text = "00"
+        milliTime.text = "00"
+        time = 0
+        lap = 1
+        timerObj?.cancel()
     }
 
 }
