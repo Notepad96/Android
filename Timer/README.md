@@ -6,6 +6,8 @@
 
 3. Lap마다 구간 사이 시간과 전체 시간 기록하여 저장
 
++) Drawable 파일로 버튼 Background 변경
+
 <br><br>
 
 # Preview
