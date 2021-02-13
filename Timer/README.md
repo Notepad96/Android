@@ -1,15 +1,17 @@
 # Topic
 
-1. Button Border : StrokeWidth 사용
+1. Timer '분:초.밀리초' 의 형태로 표현
 
-2. TextView Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+2. 시간 측정 도중 Lap 기록 가능
 
-3. 구분선 만들기
+3. Lap마다 구간 사이 시간과 전체 시간 기록하여 저장
 
-4. Layout Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
++) Drawable 파일로 버튼 Background 변경
 
 <br><br>
 
 # Preview
 
 ![preview](preview.png)
+
+![preview](preview2.png)
