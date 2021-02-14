@@ -1,15 +1,15 @@
 # Topic
 
-1. Button Border : StrokeWidth 사용
+1. Toggle Button
 
-2. TextView Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+2. 변경할 Image는 Drawable 파일의 btn_click_event.xml 파일에서 변경해준다.
 
-3. 구분선 만들기
+ㄴ state_checked 를 사용함으로써 toggle 때마다 다른 이미지를 보여줄 수 있다.
 
-4. Layout Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+※ Toggle 시 직접 값(True/False)을 변경해주어야 한다.
 
 <br><br>
 
 # Preview
 
-![preview](preview.png)
+![preview](preview.gif)
