@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity() {
     fun showTime(view: View) {
         val cal = Calendar.getInstance()
         TimePickerDialog(this, TimePickerDialog.OnTimeSetListener {
-                timePicker, h, m -> timeText.text = "${h}시 ${m}분"
+                timePicker, h, m ->
+            timeText.text = "${h}시 ${m}분"
             Toast.makeText(this, "$h:$m", Toast.LENGTH_SHORT).show()
         },
             cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE), true).show()
