@@ -8,9 +8,14 @@
     android:orientation="vertical">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+        android:id="@+id/tabLayout0"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="#F6E4E4"
+        app:tabIconTint="#E3C52D"
+        app:tabIndicatorColor="#E3C52D"
+        app:tabIndicatorHeight="5dp"
+        app:tabRippleColor="#FF1313" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
