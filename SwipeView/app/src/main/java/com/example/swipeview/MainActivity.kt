@@ -31,19 +31,19 @@ class MainActivity : AppCompatActivity() {
 
 //        tabLayout0.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.indicator))
 
-        tabLayout0.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                var iconColor = ContextCompat.getColor(baseContext, R.color.indicator)
-                tab?.icon?.setColorFilter( iconColor, PorterDuff.Mode.DST_IN)
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
-            }
-        })
+//        tabLayout0.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+//            override fun onTabSelected(tab: TabLayout.Tab?) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onTabUnselected(tab: TabLayout.Tab?) {
+//                var iconColor = ContextCompat.getColor(baseContext, R.color.indicator)
+//                tab?.icon?.setColorFilter( iconColor, PorterDuff.Mode.DST_IN)
+//            }
+//
+//            override fun onTabReselected(tab: TabLayout.Tab?) {
+//                TODO("Not yet implemented")
+//            }
+//        })
     }
 }
