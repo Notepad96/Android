@@ -11,6 +11,23 @@
 => 아래쪽에 위치하게 하기 위해서는 ViewPager2 -> TabLayout 순으로 레이아웃 구성
 
 
+<h2>TabLayout Attributes</h2>
+= 동적 =
+tabRippleColor : 탭 메뉴 클릭 중 보이는 백그라운드 Color
+tabSelectedTextColor : 선택된 탭 메뉴 텍스트 Color
+
+= 정적 =
+tabTextColor : 탭 텍스트 Color
+tabIconTint : 탭 아이템 아이콘 Color
+
+= Indicator =
+tabIndicatorColor : 선택된 탭 표시하는 지표[Indicator](안내 바) Color
+tabIndicatorHeight : Indicator 높이(크기) 지정
+tabIndicatorGravity : Indicator 위치 지정(Default : Bottom)
+
+= 기타 =
+background : Tab Layout Color
+
 </pre>
 
 <br><br>
