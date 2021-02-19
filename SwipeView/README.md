@@ -1,15 +1,21 @@
 # Topic
 
-1. Button Border : StrokeWidth 사용
+<h2>Swife View 생성</h2>
+<br>
+1. TabLayout과 ViewPager2 사용
+<br>
+2. Selected Tab Icon Color and Text Color Change - 선택된 탭의 아이콘, 텍스트 컬러 변경
+<br>
+3. Tab Bar Top or Bottom - 네비 바 위치 위쪽 혹은 아래쪽 배치
+<br>
+=> 위쪽에 위치하게 하기 위해서는 TabLayout -> ViewPager2 순으로 레이아웃 구성 <br>
+=> 아래쪽에 위치하게 하기 위해서는 ViewPager2 -> TabLayout 순으로 레이아웃 구성 <br>
 
-2. TextView Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
-
-3. 구분선 만들기
-
-4. Layout Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
 
 <br><br>
 
 # Preview
 
-![preview](preview.png)
+![preview](preview.gif)
+<br><br>
+![preview2](preview2.gif)
