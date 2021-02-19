@@ -8,5 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="indicator">#000BE6</color>
+    <color name="selected">#E3C52D</color>
+    <color name="unSelected">#60605F</color>
+
 </resources>

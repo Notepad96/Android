@@ -1,5 +1,6 @@
 package com.example.swipeview
 
+import android.graphics.Color
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,24 +27,29 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout0, viewPager) {
             tab, posiotion ->
             tab.setIcon(tabIconList[posiotion])
-//            tab.text = tabTextList[posiotion]
+            tab.text = tabTextList[posiotion]
         }.attach()
 
-//        tabLayout0.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.indicator))
+//        tabLayout0.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.selected))
 
-//        tabLayout0.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-//            override fun onTabSelected(tab: TabLayout.Tab?) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onTabUnselected(tab: TabLayout.Tab?) {
-//                var iconColor = ContextCompat.getColor(baseContext, R.color.indicator)
-//                tab?.icon?.setColorFilter( iconColor, PorterDuff.Mode.DST_IN)
-//            }
-//
-//            override fun onTabReselected(tab: TabLayout.Tab?) {
-//                TODO("Not yet implemented")
-//            }
-//        })
+
+        tabLayout0.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                var iconColor = ContextCompat.getColor(baseContext, R.color.selected)
+                tab?.icon?.setColorFilter( iconColor, PorterDuff.Mode.SRC_IN)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                var iconColor = ContextCompat.getColor(baseContext, R.color.unSelected)
+                tab?.icon?.setColorFilter( iconColor, PorterDuff.Mode.SRC_IN)
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                var iconColor = ContextCompat.getColor(baseContext, R.color.selected)
+                tab?.icon?.setColorFilter( iconColor, PorterDuff.Mode.SRC_IN)
+            }
+        })
+        tabLayout0.selectTab(tabLayout0.getTabAt(0))
     }
 }

@@ -7,18 +7,30 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+    </androidx.viewpager2.widget.ViewPager2>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F6E4E4"
-        app:tabIconTint="#E3C52D"
+        app:tabGravity="fill"
+        app:tabIconTint="@color/unSelected"
         app:tabIndicatorColor="#E3C52D"
         app:tabIndicatorHeight="5dp"
-        app:tabRippleColor="#FF1313" />
+        app:tabRippleColor="#FF1313"
+        app:tabSelectedTextColor="@color/selected"
+        app:tabTextColor="@color/unSelected"
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        app:tabIndicatorGravity="top"
+        />
+
 </LinearLayout>
