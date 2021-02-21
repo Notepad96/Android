@@ -4,7 +4,9 @@
     <item android:title="Test" android:id="@+id/test"></item>
     <item android:title="Test2">
         <menu>
-            <item android:title="Item21" android:id="@+id/test2" />
+            <item
+                android:id="@+id/test2"
+                android:title="Item21" />
             <item android:title="Item22" />
         </menu>
     </item>
