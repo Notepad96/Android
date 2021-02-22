@@ -2,13 +2,12 @@
 
 <pre>
 
-1. Button Border : StrokeWidth 사용
+1. DrawerNavigation 메뉴 구현
 
-2. TextView Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+2. DrawerNavigarion Header Custom
 
-3. 구분선 만들기
-
-4. Layout Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+3. Title bar Menu 생성
+  ㄴ showAsAction : always로 하였을 시 아이콘 항상 표시
 
 
 </pre>
