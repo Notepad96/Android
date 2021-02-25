@@ -51,7 +51,7 @@ class MyAdapter() :
     fun prevMonth() {
         if(calendar.get(Calendar.MONTH) == 0) {
             calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 1)
-            calendar.set(Calendar.MONTH, calendar.get(Calendar.DECEMBER))
+            calendar.set(Calendar.MONTH, 11)
         } else {
             calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1)
         }
@@ -60,7 +60,7 @@ class MyAdapter() :
     fun nextMonth() {
         if(calendar.get(Calendar.MONTH) == 11) {
             calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) + 1)
-            calendar.set(Calendar.MONTH, calendar.get(0))
+            calendar.set(Calendar.MONTH, 0)
         } else {
             calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1)
         }
