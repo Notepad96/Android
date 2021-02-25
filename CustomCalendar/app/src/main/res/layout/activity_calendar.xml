@@ -18,7 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_baseline_chevron_left_24"
-            app:backgroundTint="@color/black" />
+            app:backgroundTint="@color/black"
+            android:onClick="prev"
+            />
 
         <Button
             android:id="@+id/tempDay"
@@ -34,7 +36,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_baseline_chevron_right_24"
-            app:backgroundTint="@color/black" />
+            app:backgroundTint="@color/black"
+            android:onClick="next"
+            />
 
     </LinearLayout>
 
