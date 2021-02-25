@@ -25,7 +25,7 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2021, 02"
+            android:text="2021 02"
             android:textColor="@color/black"
             android:textSize="24sp" />
 
@@ -41,6 +41,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#eeeeee"
         android:orientation="horizontal">
 
         <TextView
@@ -49,7 +50,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="SUN"
-            android:background="@drawable/border"
             android:textColor="@color/red" />
 
         <TextView
@@ -58,7 +58,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="MUN"
-            android:background="@drawable/border"
             android:textColor="@color/black" />
 
         <TextView
@@ -67,7 +66,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="TUE"
-            android:background="@drawable/border"
             android:textColor="@color/black" />
 
         <TextView
@@ -76,7 +74,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="WED"
-            android:background="@drawable/border"
             android:textColor="@color/black" />
 
         <TextView
@@ -85,7 +82,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="THU"
-            android:background="@drawable/border"
             android:textColor="@color/black" />
 
         <TextView
@@ -94,7 +90,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="FRI"
-            android:background="@drawable/border"
             android:textColor="@color/black" />
 
         <TextView
@@ -103,7 +98,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="SAT"
-            android:background="@drawable/border"
             android:textColor="@color/blue" />
     </LinearLayout>
 
