@@ -1,11 +1,9 @@
 package com.example.customcalendar
 
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item.view.*
 import java.util.*
@@ -26,6 +24,7 @@ class MyAdapter() :
     var prevDays = 0
     var currentDays = 0
     var nextDays = 0
+    var selectDays = 0
 
     class MyViewHolder(val layout: View) : RecyclerView.ViewHolder(layout)
 
@@ -44,6 +43,17 @@ class MyAdapter() :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.layout.day.text = date[position].toString()
+
+        if(position == selectDays) {
+            holder.layout.dayBox.setBackgroundResource(R.drawable.border_selected)
+        } else {
+            holder.layout.dayBox.setBackgroundResource(0)
+        }
+
+        holder.layout.dayBox.setOnClickListener {
+            selectDays = position
+            notifyDataSetChanged()
+        }
 
         when(position % DAYS_OF_WEEK) {
             0 -> holder.layout.day.setTextColor(Color.parseColor("#f53a25"))
