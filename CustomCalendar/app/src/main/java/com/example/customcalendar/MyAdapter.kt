@@ -1,6 +1,7 @@
 package com.example.customcalendar
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,13 @@ class MyAdapter() :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.layout.day.text = date[position].toString()
+
+        when(position % DAYS_OF_WEEK) {
+            0 -> holder.layout.day.setTextColor(Color.parseColor("#f53a25"))
+            6 -> holder.layout.day.setTextColor(Color.parseColor("#2869f7"))
+            else -> holder.layout.day.setTextColor(Color.parseColor("#585859"))
+        }
+
     }
 
     override fun getItemCount() = date.size
