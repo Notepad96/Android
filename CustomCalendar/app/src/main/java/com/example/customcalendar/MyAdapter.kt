@@ -51,6 +51,12 @@ class MyAdapter() :
             else -> holder.layout.day.setTextColor(Color.parseColor("#585859"))
         }
 
+        if(position < prevDays || position > currentDays + prevDays - 1) {
+            holder.layout.day.alpha = 0.4f
+        } else {
+            holder.layout.day.alpha = 1.0f
+        }
+
     }
 
     override fun getItemCount() = date.size
