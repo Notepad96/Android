@@ -4,8 +4,11 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item.view.*
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 
 class MyAdapter() :
@@ -24,7 +27,7 @@ class MyAdapter() :
     var prevDays = 0
     var currentDays = 0
     var nextDays = 0
-    var selectDays = 0
+    var selectDays = -1
 
     class MyViewHolder(val layout: View) : RecyclerView.ViewHolder(layout)
 
@@ -37,6 +40,8 @@ class MyAdapter() :
 
         layout.layoutParams = RecyclerView.LayoutParams(width, height)
         getMonthDays()
+        selectDays =  calendar.get(Calendar.DAY_OF_MONTH)
+        Toast.makeText(parent.context, "$selectDays", Toast.LENGTH_SHORT).show()
 
         return MyViewHolder(layout)
     }
