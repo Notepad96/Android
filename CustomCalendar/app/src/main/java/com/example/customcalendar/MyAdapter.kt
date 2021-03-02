@@ -1,12 +1,14 @@
 package com.example.customcalendar
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item.view.*
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
@@ -37,7 +39,9 @@ class MyAdapter() :
 
         layout.layoutParams = RecyclerView.LayoutParams(width, height)
         getMonthDays()
-
+        var day = SimpleDateFormat("yyyy-MM-dd / HH:mm", Locale.getDefault()).format(calendar.time)
+        //Log.d("day", day)
+        Log.d("day", calendar.get(Calendar.DATE).toString())
 
         return MyViewHolder(layout)
     }
