@@ -14,13 +14,10 @@ import java.util.*
 class MyAdapter() :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>()
 {
-    val calendar = Calendar.getInstance()
+    var calendar: Calendar = Calendar.getInstance()
     companion object {
         const val DAYS_OF_WEEK = 7
         const val ROW = 6
-    }
-    init {
-        calendar.time = Date()
     }
 
     var date = IntArray(DAYS_OF_WEEK * ROW) { 0 }
@@ -40,8 +37,7 @@ class MyAdapter() :
 
         layout.layoutParams = RecyclerView.LayoutParams(width, height)
         getMonthDays()
-        selectDays =  calendar.get(Calendar.DAY_OF_MONTH)
-        Toast.makeText(parent.context, "$selectDays", Toast.LENGTH_SHORT).show()
+
 
         return MyViewHolder(layout)
     }
