@@ -17,16 +17,21 @@ class MyAdapter() :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>()
 {
     var calendar: Calendar = Calendar.getInstance()
-    companion object {
-        const val DAYS_OF_WEEK = 7
-        const val ROW = 6
-    }
 
     var date = IntArray(DAYS_OF_WEEK * ROW) { 0 }
     var prevDays = 0
     var currentDays = 0
     var nextDays = 0
     var selectDays = -1
+
+    companion object {
+        const val DAYS_OF_WEEK = 7
+        const val ROW = 6
+    }
+    init {
+        getMonthDays()
+        selectDays = prevDays + Date().day - 1
+    }
 
     class MyViewHolder(val layout: View) : RecyclerView.ViewHolder(layout)
 
@@ -39,9 +44,8 @@ class MyAdapter() :
 
         layout.layoutParams = RecyclerView.LayoutParams(width, height)
         getMonthDays()
-        var day = SimpleDateFormat("yyyy-MM-dd / HH:mm", Locale.getDefault()).format(calendar.time)
-        //Log.d("day", day)
-        Log.d("day", calendar.get(Calendar.DATE).toString())
+
+        //var day = SimpleDateFormat("yyyy-MM-dd / HH:mm", Locale.getDefault()).format(Date())
 
         return MyViewHolder(layout)
     }
@@ -58,6 +62,10 @@ class MyAdapter() :
         holder.layout.dayBox.setOnClickListener {
             selectDays = position
             notifyDataSetChanged()
+        }
+        holder.layout.dayBox.setOnLongClickListener {
+
+            true
         }
 
         when(position % DAYS_OF_WEEK) {
