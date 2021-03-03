@@ -19,8 +19,11 @@ class MyAdapter() :
     var calendar: Calendar = Calendar.getInstance()
 
     var date = IntArray(DAYS_OF_WEEK * ROW) { 0 }
+    var prevMonth = 0
     var prevDays = 0
+    var currentMonth = 0
     var currentDays = 0
+    var nextMonth = 0
     var nextDays = 0
     var selectDays = -1
 
@@ -114,6 +117,7 @@ class MyAdapter() :
 
         var prevCalendar = calendar.clone() as Calendar
         if (prevCalendar.get(Calendar.MONTH) == 0) {
+            prevMonth = 11
             prevCalendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 1)
             prevCalendar.set(Calendar.MONTH, Calendar.DECEMBER)
         } else {
