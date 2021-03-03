@@ -18,12 +18,9 @@ class MyAdapter() :
 {
     var calendar: Calendar = Calendar.getInstance()
 
-    var date = IntArray(DAYS_OF_WEEK * ROW) { 0 }
-    var prevMonth = 0
+    var dates = MutableList<MyDate>(DAYS_OF_WEEK * ROW) { MyDate() }
     var prevDays = 0
-    var currentMonth = 0
     var currentDays = 0
-    var nextMonth = 0
     var nextDays = 0
     var selectDays = -1
 
@@ -54,7 +51,7 @@ class MyAdapter() :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.layout.day.text = date[position].toString()
+        holder.layout.day.text = dates[position].day.toString()
 
         if(position == selectDays) {
             holder.layout.dayBox.setBackgroundResource(R.drawable.border_selected)
@@ -85,7 +82,7 @@ class MyAdapter() :
 
     }
 
-    override fun getItemCount() = date.size
+    override fun getItemCount() = dates.size
 
 
     fun prevMonth() {
@@ -115,19 +112,30 @@ class MyAdapter() :
         currentDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         nextDays = DAYS_OF_WEEK * ROW - (prevDays + currentDays)
 
+        var tempYear = calendar.get(Calendar.YEAR)
+        var tempMonth = calendar.get(Calendar.MONTH)
+        var prevYear = tempYear
+        var prevMonth = tempMonth
+        var nextYear = tempYear
+        var nextMonth = tempMonth
+
         var prevCalendar = calendar.clone() as Calendar
         if (prevCalendar.get(Calendar.MONTH) == 0) {
+            prevYear--
             prevMonth = 11
             prevCalendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 1)
             prevCalendar.set(Calendar.MONTH, Calendar.DECEMBER)
+        } else if(prevCalendar.get(Calendar.MONTH) == 11) {
+            nextYear++
+            nextMonth = 0
         } else {
             prevCalendar.set(Calendar.MONTH, prevCalendar.get(Calendar.MONTH) - 1)
         }
 
         var prevLast = prevCalendar.getActualMaximum(Calendar.DAY_OF_MONTH) - prevDays
-        for( i in 1..prevDays) date[index++] = ++prevLast
-        for( i in 1..currentDays) date[index++] = i
-        for( i in 1..nextDays) date[index++] = i
+        for( i in 1..prevDays) dates[index++].reset(prevYear, prevMonth , ++prevLast, index % 7)
+        for( i in 1..currentDays) dates[index++].reset(tempYear, tempMonth, i, index % 7)
+        for( i in 1..nextDays) dates[index++].reset(nextYear, nextMonth, i, index % 7)
     }
 
 }

@@ -1,14 +1,11 @@
 package com.example.customcalendar
 
-import java.util.*
-
-data class MyDate(var year: Int, var month: Int, var day: Int, var yoil: Int) {
-    init {
-        var cal = Calendar.getInstance()
-        year = cal.get(Calendar.YEAR)
-        month = cal.get(Calendar.MONTH)
-        day = cal.get(Calendar.DAY_OF_MONTH)
-        yoil = cal.get(Calendar.DAY_OF_WEEK)
+data class MyDate(var year: Int =0, var month: Int =0, var day: Int =0, var yoil: Int =0) {
+    fun reset(year: Int, month: Int , day: Int , yoil: Int ) {
+        this.year = year
+        this.month = month
+        this.day = day
+        this.yoil = yoil
     }
     override fun toString(): String {
         return "$year-$month-$day-$yoil"
