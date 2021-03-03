@@ -128,6 +128,7 @@ class MyAdapter() :
         } else if(prevCalendar.get(Calendar.MONTH) == 11) {
             nextYear++
             nextMonth = 0
+            prevCalendar.set(Calendar.MONTH, prevCalendar.get(Calendar.MONTH) - 1)
         } else {
             prevCalendar.set(Calendar.MONTH, prevCalendar.get(Calendar.MONTH) - 1)
         }
