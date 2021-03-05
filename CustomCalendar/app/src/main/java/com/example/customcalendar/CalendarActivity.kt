@@ -19,7 +19,7 @@ class CalendarActivity : AppCompatActivity() {
         setContentView(R.layout.activity_calendar)
 
         viewManager = GridLayoutManager(this, 7) // 열 개수(Column Count)
-        viewAdapter = MyAdapter()
+        viewAdapter = MyAdapter(this)
 
         recyclerView = calendarView.apply {
             setHasFixedSize(true)

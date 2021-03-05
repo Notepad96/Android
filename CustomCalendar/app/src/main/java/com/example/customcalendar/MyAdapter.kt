@@ -1,11 +1,14 @@
 package com.example.customcalendar
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item.view.*
 import java.text.SimpleDateFormat
@@ -13,7 +16,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 
-class MyAdapter() :
+class MyAdapter(var context: Context) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>()
 {
     var calendar: Calendar = Calendar.getInstance()
@@ -59,14 +62,19 @@ class MyAdapter() :
             holder.layout.dayBox.setBackgroundResource(0)
         }
 
-        holder.layout.dayBox.setOnClickListener {
-            selectDays = position
-            notifyDataSetChanged()
-        }
-        holder.layout.dayBox.setOnLongClickListener {
 
-            true
-        }
+        holder.layout.dayBox.setOnClickListener(object: DoubleClickListener() {
+            override fun onClick(v: View) {
+                selectDays = position
+                notifyDataSetChanged()
+
+            }
+            override fun onDoubleClick(v: View) {
+                val intent = Intent(context, DateMomo::class.java)
+                intent.putExtra("today", dates[position])
+                ContextCompat.startActivity(context, intent, null)
+            }
+        })
 
         when(position % DAYS_OF_WEEK) {
             0 -> holder.layout.day.setTextColor(Color.parseColor("#f53a25"))
@@ -84,6 +92,21 @@ class MyAdapter() :
 
     override fun getItemCount() = dates.size
 
+    abstract class DoubleClickListener : View.OnClickListener {
+        private var lastClickTime: Long = 0
+        override fun onClick(v: View) {
+            val clickTime = System.currentTimeMillis()
+            if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA) {
+                onDoubleClick(v)
+                lastClickTime = 0
+            }
+            lastClickTime = clickTime
+        }
+        abstract fun onDoubleClick(v: View)
+        companion object {
+            private const val DOUBLE_CLICK_TIME_DELTA: Long = 300 //milliseconds
+        }
+    }
 
     fun prevMonth() {
         if(calendar.get(Calendar.MONTH) == 0) {
