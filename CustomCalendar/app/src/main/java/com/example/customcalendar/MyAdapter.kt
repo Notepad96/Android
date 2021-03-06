@@ -141,6 +141,7 @@ class MyAdapter(var context: Context) :
         if (prevCalendar.get(Calendar.MONTH) == 0) {
             prevYear--
             prevMonth = 11
+            nextMonth++
             prevCalendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 1)
             prevCalendar.set(Calendar.MONTH, Calendar.DECEMBER)
         } else if(prevCalendar.get(Calendar.MONTH) == 11) {
