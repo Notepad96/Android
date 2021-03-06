@@ -19,6 +19,8 @@ import java.util.*
 class MyAdapter(var context: Context) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>()
 {
+    private val DOUBLE_CLICK_TIME_DELTA: Long = 500
+    private var lastClickTime: Long = 0
     var calendar: Calendar = Calendar.getInstance()
 
     var dates = MutableList<MyDate>(DAYS_OF_WEEK * ROW) { MyDate() }
@@ -66,8 +68,13 @@ class MyAdapter(var context: Context) :
         holder.layout.dayBox.setOnClickListener(object: DoubleClickListener() {
             override fun onClick(v: View) {
                 selectDays = position
+                val clickTime = System.currentTimeMillis()
+                if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA) {
+                    onDoubleClick(v)
+                    lastClickTime = 0
+                }
+                lastClickTime = clickTime
                 notifyDataSetChanged()
-
             }
             override fun onDoubleClick(v: View) {
                 val intent = Intent(context, DateMomo::class.java)
@@ -93,19 +100,7 @@ class MyAdapter(var context: Context) :
     override fun getItemCount() = dates.size
 
     abstract class DoubleClickListener : View.OnClickListener {
-        private var lastClickTime: Long = 0
-        override fun onClick(v: View) {
-            val clickTime = System.currentTimeMillis()
-            if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA) {
-                onDoubleClick(v)
-                lastClickTime = 0
-            }
-            lastClickTime = clickTime
-        }
         abstract fun onDoubleClick(v: View)
-        companion object {
-            private const val DOUBLE_CLICK_TIME_DELTA: Long = 300 //milliseconds
-        }
     }
 
     fun prevMonth() {
@@ -153,6 +148,8 @@ class MyAdapter(var context: Context) :
             nextMonth = 0
             prevCalendar.set(Calendar.MONTH, prevCalendar.get(Calendar.MONTH) - 1)
         } else {
+            prevMonth--
+            nextMonth++
             prevCalendar.set(Calendar.MONTH, prevCalendar.get(Calendar.MONTH) - 1)
         }
 
