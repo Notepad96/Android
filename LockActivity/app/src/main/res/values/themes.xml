@@ -16,9 +16,11 @@
 
     <style name="lockBtn" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">@color/lockNum</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">22sp</item>
+        <!--
         <item name="strokeWidth">2dp</item>
         <item name="strokeColor">@color/lockNum</item>
+        -->
         <item name="android:layout_height">100dp</item>
         <item name="android:layout_margin">3dp</item>
     </style>
