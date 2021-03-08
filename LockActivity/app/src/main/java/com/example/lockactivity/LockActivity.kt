@@ -21,10 +21,18 @@ class LockActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lock)
 
-        sharedPref = getSharedPreferences("pwd", MODE_PRIVATE)
-        sharedPref.edit {
-            putString("pwd", "000000")
+        sharedPref = getSharedPreferences("setting", MODE_PRIVATE)
+        if(sharedPref.getString("pwd", null) == null) {
+            textInfo.visibility = View.VISIBLE
+            textInfo.text = when(intent.getIntExtra("second", 0)) {
+                0 -> "비밀번호를 설정해 주세요."
+                1 -> "비밀번호 확인"
+                else -> "비밀번호가 일치하지 않습니다!"
+            }
+        } else {
+            textInfo.visibility = View.GONE
         }
+
         lockPwd.text = viewText.joinToString("")
     }
 
@@ -47,16 +55,32 @@ class LockActivity : AppCompatActivity() {
         lockPwd.text = viewText.joinToString("")
 
         if(count == 6) {
-            if(password.joinToString("") == sharedPref.getString("pwd", null)) {
+            val pwd = password.joinToString("")
+            if(sharedPref.getString("pwd", null) == null) {
+                var retry = Intent(this, LockActivity::class.java)
+                if(intent.getStringExtra("password") == pwd) {
+                    Toast.makeText(this, "${pwd}/${intent.getStringExtra("password")}", Toast.LENGTH_SHORT).show()
+                    sharedPref.edit{
+                        putString("pwd", viewText.joinToString(""))
+                    }
+                } else {
+                    retry.putExtra("password", pwd)
+                    retry.putExtra("second", retry.getIntExtra("second", 0) + 1 )
+                }
+                startActivity(retry)
+                finish()
+            }
+            else if(pwd == sharedPref.getString("pwd", null)) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
-                //Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
-                Toast.makeText(this, "${password.joinToString("")}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "$pwd", Toast.LENGTH_SHORT).show()
                 count = 0
                 viewText = arrayListOf<String>("○", "○", "○", "○", "○", "○")
                 lockPwd.text = viewText.joinToString("")
             }
         }
     }
+
 }
