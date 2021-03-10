@@ -35,7 +35,7 @@ class MyAdapter(var context: Context) :
     }
     init {
         getMonthDays()
-        selectDays = prevDays + Date().day - 1
+        selectDays = prevDays + Date().date - 1
     }
 
     class MyViewHolder(val layout: View) : RecyclerView.ViewHolder(layout)
