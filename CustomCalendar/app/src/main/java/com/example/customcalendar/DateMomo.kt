@@ -13,7 +13,7 @@ class DateMomo : AppCompatActivity() {
 
         var today = intent.getParcelableExtra<MyDate>("today")
         var date = Date(today.year, today.month, today.day)
-        Toast.makeText(this, "${date.toString()}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "${today.getYoil()}", Toast.LENGTH_SHORT).show()
         var text = SimpleDateFormat("yy/MM/dd").format(date)
         supportActionBar!!.title = text
     }
