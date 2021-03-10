@@ -2,13 +2,15 @@
 
 <pre>
 
-1. Button Border : StrokeWidth 사용
+1. 초기 접속시 비밀번호 설정 창
 
-2. TextView Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+2. 비밀번호 설정 시 2번 입력하여 확인 하는 "비밀번호 확인" 하도록  동작
 
-3. 구분선 만들기
+3. 비밀번호 입력 중 초기화, 지우기 버튼
 
-4. Layout Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+4. 비밀번호가 일치하지 않을 경우 안내 메시지
+
+5. 비밀번호가 일치 시 메인 화면에 접속
 
 
 </pre>
