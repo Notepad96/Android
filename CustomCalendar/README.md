@@ -2,13 +2,13 @@
 
 <pre>
 
-1. Button Border : StrokeWidth 사용
+1. Custom Calendal 생성
 
-2. TextView Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+2. 7 X 6 사이즈의 달력, 남는 날은 각각 전달, 다음달의 일자로 채워짐
 
-3. 구분선 만들기
+3. 달력 오픈 시 현재 날짜의 포커스를 갖으며, 포커스를 갖는 날은 초록색 테두리로 표현된다.
 
-4. Layout Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+4. 날짜를 클릭 시 포커스가 해당 날짜로 변경되며 더블 클릭 시 해당 날짜에 관한 작업을 구현 할 수 있는 액티비티로 이동한다.
 
 
 </pre>
