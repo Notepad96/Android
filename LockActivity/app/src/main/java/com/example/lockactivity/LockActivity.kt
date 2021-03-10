@@ -88,6 +88,8 @@ class LockActivity : AppCompatActivity() {
                 count = 0
                 viewText = arrayListOf<String>("○", "○", "○", "○", "○", "○")
                 lockPwd.text = viewText.joinToString("")
+                textInfo.visibility = View.VISIBLE
+                textInfo.text = "비밀번호가 일치하지 않습니다!"
             }
         }
     }
