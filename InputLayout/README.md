@@ -2,13 +2,11 @@
 
 <pre>
 
-1. Button Border : StrokeWidth 사용
+1. TextInputLayout 을 사용
 
-2. TextView Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+2. 글자 수에 따라서 에러 발생시키고 에러 메시지 나타낼 수 있다.
 
-3. 구분선 만들기
-
-4. Layout Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+3. 토글 아이콘을 사용하여 비밀번호를 보이게 하거나 숨길 수 있다.
 
 
 </pre>
