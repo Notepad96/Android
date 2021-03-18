@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     fun dialog(view: View) {
         AlertDialog.Builder(view.context).apply {
-            setTitle("알림창")
+            setTitle("알림창 제목")
             setMessage("메세지입니다. 메세지입니다. 메세지입니다. 메세지입니다.")
             setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
                 Toast.makeText(view.context, "OK Button Click", Toast.LENGTH_SHORT).show()
