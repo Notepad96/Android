@@ -25,7 +25,15 @@ class MainActivity : AppCompatActivity() {
         val mediaPlayer = MediaPlayer.create(this, R.raw.sound);
 
         mediaPlayer.start()
-
+/*
+        val url = "http://........" // your URL here
+        val mediaPlayer: MediaPlayer? = MediaPlayer().apply {
+            setAudioStreamType(AudioManager.STREAM_MUSIC)
+            setDataSource(url)
+            prepare() // might take long! (for buffering, etc)
+            start()
+        }
+*/
         Toast.makeText(view.context, "Music Start", Toast.LENGTH_SHORT).show()
     }
 }
