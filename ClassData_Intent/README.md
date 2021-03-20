@@ -2,13 +2,13 @@
 
 <pre>
 
-1. Button Border : StrokeWidth 사용
+1. Class 객체를 Intent에 넣어서 보낸다.
 
-2. TextView Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+2. 전송할 Class를 @Parcelize 사용하여 선언하였다.
 
-3. 구분선 만들기
+3. 1개를 받을 때는 getParcelableExtra를 사용한다
 
-4. Layout Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+4. 다수가 포함 된 리스트를 받을 때는 getSerializableExtra를 사용한다.
 
 
 </pre>
