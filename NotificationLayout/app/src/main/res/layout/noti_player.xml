@@ -47,7 +47,7 @@
         android:layout_height="match_parent"
         android:background="null"
         android:src="@drawable/ic_baseline_close_24"
-        android:layout_marginRight="5dp"
+        android:paddingRight="8dp"
         />
 
 
