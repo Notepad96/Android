@@ -12,9 +12,25 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <item name="calNumberColor">@color/black</item>
     </style>
 
     <style name="CustomDarkTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#535255</item>
+        <item name="colorPrimaryVariant">#2E2C32</item>
+        <item name="colorOnPrimary">#2E2C32</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:background">#2E2C32</item>
+        
+        <item name="calNumberColor">@color/white</item>
     </style>
+
 </resources>

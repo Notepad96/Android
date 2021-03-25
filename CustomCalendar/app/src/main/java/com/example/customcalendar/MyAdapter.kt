@@ -86,7 +86,7 @@ class MyAdapter(var context: Context) :
         when(position % DAYS_OF_WEEK) {
             0 -> holder.layout.day.setTextColor(Color.parseColor("#f53a25"))
             6 -> holder.layout.day.setTextColor(Color.parseColor("#2869f7"))
-            else -> holder.layout.day.setTextColor(Color.parseColor("#585859"))
+            else -> holder.layout.day.setTextColor(Color.parseColor("#ffffff"))
         }
 
         if(position < prevDays || position > currentDays + prevDays - 1) {
