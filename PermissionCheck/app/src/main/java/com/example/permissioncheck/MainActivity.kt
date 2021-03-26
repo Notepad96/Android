@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -13,7 +14,8 @@ class MainActivity : AppCompatActivity() {
 
     val requestPermissionms = arrayOf(
             Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_FINE_LOCATION
             )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,11 +43,13 @@ class MainActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when(requestCode) {
             PERMISSIONCODE -> {
-                if(grantResults.isNotEmpty()) {
-                    for((i, permission) in permissions.withIndex()) {
-                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.isNotEmpty()) {
+                    for ((i, permission) in permissions.withIndex()) {
+
+                        if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
                             Log.d("Msg", "$permission Denied")
-                            finish()
+                            Toast.makeText(this, "권한을 허용 해주세요. 권한을 묻는 창이 뜨지 않을 경우 설정>애플리케이션에서 권한을 허용해주세요.", Toast.LENGTH_SHORT).show()
+                            checkPermissions()
                         }
                     }
                 }
