@@ -23,7 +23,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="null"
+        android:background="@color/white"
         android:src="@drawable/ic_baseline_fast_rewind_24"
         android:layout_marginRight="10dp"
         />
@@ -31,21 +31,21 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="null"
+        android:background="@color/white"
         android:src="@drawable/ic_baseline_pause_24"
         android:layout_marginRight="10dp"
         />
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="null"
+        android:background="@color/white"
         android:src="@drawable/ic_baseline_fast_forward_24"
         android:layout_marginRight="10dp"
         />
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="null"
+        android:background="@color/white"
         android:src="@drawable/ic_baseline_close_24"
         android:paddingRight="8dp"
         />
