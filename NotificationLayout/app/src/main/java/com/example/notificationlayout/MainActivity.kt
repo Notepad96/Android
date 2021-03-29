@@ -27,6 +27,9 @@ class MainActivity : AppCompatActivity() {
         tracks = mutableListOf()
 
         tracks.add(Track("Track 1", "Artist 1", R.drawable.ic_baseline_close_24))
+        tracks.add(Track("Track 2", "Artist 2", R.drawable.ic_baseline_close_24))
+        tracks.add(Track("Track 3", "Artist 3", R.drawable.ic_baseline_close_24))
+        tracks.add(Track("Track 4", "Artist 4", R.drawable.ic_baseline_close_24))
     }
 
 }
