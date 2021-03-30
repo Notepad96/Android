@@ -1,6 +1,7 @@
 package com.example.notificationlayout
 
 import android.Manifest
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -21,6 +22,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        popTracks()
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createChannel()
+        }
+    }
+
+    private fun createChannel() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            var channel = NotificationChannel(CreateNotification.CHANNER,
+            "Dev", NotificationManager.IMPORTANCE_LOW)
+        }
     }
 
     fun popTracks() {

@@ -9,10 +9,6 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
 class CreateNotification {
-    private val CHANNER = "music"
-    private val PREV = "playPrev"
-    private val ACTION = "playTemp"
-    private val NEXT = "playNext"
 
     lateinit var notification: Notification
 
@@ -23,7 +19,7 @@ class CreateNotification {
 
             var icon = BitmapFactory.decodeResource(context.resources, track.image)
 
-            notification = NotificationCompat.Builder(context, CHANNER)
+            notification = NotificationCompat.Builder(context, Companion.CHANNER)
                     .setSmallIcon(R.drawable.ic_baseline_play_arrow_24)
                     .setContentTitle(track.title)
                     .setContentText(track.artist)
@@ -35,6 +31,13 @@ class CreateNotification {
 
             notificationManager.notify(1, notification)
         }
+    }
+
+    companion object {
+        const val CHANNER = "music"
+        const val PREV = "playPrev"
+        const val ACTION = "playTemp"
+        const val NEXT = "playNext"
     }
 
 }
