@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.loader.app.LoaderManager
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var notiManager: NotificationManager
@@ -27,12 +28,23 @@ class MainActivity : AppCompatActivity() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel()
         }
+
+        imgBtn.setOnClickListener {
+            CreateNotification.createNotification(applicationContext,
+            tracks.get(1), R.drawable.ic_baseline_pause_24, 1, tracks.size -1)
+        }
+
     }
 
     private fun createChannel() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             var channel = NotificationChannel(CreateNotification.CHANNER,
             "Dev", NotificationManager.IMPORTANCE_LOW)
+
+            notiManager = getSystemService(NotificationManager::class.java)
+            if(notiManager != null) {
+                notiManager.createNotificationChannel(channel)
+            }
         }
     }
 
