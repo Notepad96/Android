@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Build
@@ -33,11 +34,16 @@ class MainActivity : AppCompatActivity(), Playble {
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel()
+            registerReceiver(BcReceiver(), IntentFilter("TRACKS_TRACK"))
+            startService(Intent(baseContext, OnClearFromRecentService::class.java))
         }
 
         imgBtn.setOnClickListener {
-            CreateNotification.createNotification(applicationContext,
-            tracks.get(1), R.drawable.ic_baseline_pause_24, 1, tracks.size -1)
+            if(isPlaying) {
+                onTrackPause()
+            } else {
+                onTrackPlay()
+            }
         }
 
     }
@@ -69,23 +75,34 @@ class MainActivity : AppCompatActivity(), Playble {
         position--
         CreateNotification.createNotification(this, tracks.get(position),
                 R.drawable.ic_baseline_fast_rewind_24, position, tracks.size -1)
-        title = tracks.get(position).title
+        textView.text = tracks.get(position).title
     }
 
     override fun onTrackPlay() {
-        TODO("Not yet implemented")
+        CreateNotification.createNotification(this, tracks.get(position),
+                R.drawable.ic_baseline_pause_24, position, tracks.size -1)
+        imgBtn.setImageResource(R.drawable.ic_baseline_pause_24)
+        textView.text = tracks.get(position).title
+        isPlaying = true
     }
 
     override fun onTrackPause() {
-        TODO("Not yet implemented")
+        CreateNotification.createNotification(this, tracks.get(position),
+                R.drawable.ic_baseline_fast_rewind_24, position, tracks.size -1)
+        imgBtn.setImageResource(R.drawable.ic_baseline_play_arrow_24)
+        textView.text = tracks.get(position).title
+        isPlaying = false
     }
 
     override fun onTrackNext() {
-        TODO("Not yet implemented")
+        position++
+        CreateNotification.createNotification(this, tracks.get(position),
+                R.drawable.ic_baseline_fast_forward_24, position, tracks.size -1)
+        textView.text = tracks.get(position).title
     }
 
 
-    inner class broadcastReceiver : BroadcastReceiver() {
+    inner class BcReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             var action = intent?.extras?.getString("actionName")
             when(action) {
@@ -101,5 +118,15 @@ class MainActivity : AppCompatActivity(), Playble {
                     onTrackNext()
             }
         }
+    }
+    var bcReceiver = BcReceiver()
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notiManager.cancelAll()
+        }
+
+        unregisterReceiver(bcReceiver)
     }
 }
