@@ -3,6 +3,7 @@ package com.example.notificationmusic
 import android.Manifest
 import android.content.pm.PackageManager
 import android.database.Cursor
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -42,6 +43,10 @@ class MainActivity : AppCompatActivity() {
         btnStart.setOnClickListener {
             getAudioList()
 /*
+            for(i in datas) {
+                Log.d("musicList", i.title)
+            }
+*/
             viewManager = LinearLayoutManager(applicationContext)
             viewAdapter = ListAdapter(datas)
 
@@ -50,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 layoutManager = viewManager
                 adapter = viewAdapter
             }
- */
+
         }
 
     }
@@ -89,10 +94,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAudioList() {
-        val projection = arrayOf(MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE,
+        val projection = arrayOf(
+                MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.ALBUM,
-                MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.DURATION)
-        val selection = "${MediaStore.Audio.Media.IS_MUSIC} = 1"
+                MediaStore.Audio.Media.DURATION)
+        val selection = null //"${MediaStore.Audio.Media.IS_MUSIC} = 1"
         val selectionArgs = null
         val sortOrder = "${MediaStore.Audio.Media.TITLE} ASC"
 
@@ -104,7 +110,10 @@ class MainActivity : AppCompatActivity() {
                 sortOrder
         )?.use { cursor ->
             while (cursor.moveToNext()) {
-                Log.d("musicList", cursor.getString(1))
+//                Log.d("musicList", cursor.getString(1))
+                datas.add(Music(cursor.getLong(0), cursor.getString(1),
+                cursor.getString(2), cursor.getString(3),
+                cursor.getLong(4) ))
             }
         }
 

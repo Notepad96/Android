@@ -1,6 +1,7 @@
 package com.example.notificationmusic
 
-class Music(var id: Long, var albumId: Long,
-            var title: String, var artist: String,
-            var info: String, var duration: Long, var SavePath: String) {
+import android.net.Uri
+
+class Music(var id: Long, var title: String, var artist: String,
+            var album: String, var duration: Long) {
 }

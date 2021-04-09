@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="50dp"
     android:orientation="horizontal">
-
+<!--
     <ImageView
         android:id="@+id/imgMusicNot"
         android:layout_width="50dp"
@@ -45,5 +45,5 @@
         android:gravity="center"
         android:text="03:30"
         android:textSize="12sp"/>
-
+-->
 </LinearLayout>
