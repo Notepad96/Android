@@ -22,17 +22,16 @@ class ListAdapter(val datas: List<Music>) : RecyclerView.Adapter<ListAdapter.MyV
         val layout = LayoutInflater.from(parent.context)
                 .inflate(R.layout.list_item, parent, false) as LinearLayout
 
-        Toast.makeText(parent.context, "${datas.size}", Toast.LENGTH_SHORT).show()
         return MyViewHolder(layout)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        Log.d("musicList", datas[position].id.toString())
+        Log.d("musicList", datas[position].album_id.toString())
 
         holder.layout.listTitle.text = datas[position].title
         holder.layout.listArtist.text = datas[position].artist
         holder.layout.listDuration.text = android.text.format.DateFormat.format("mm:ss", datas[position].duration)
-        holder.layout.listImg.load(ContentUris.withAppendedId(artUri, datas[position].id))
+        holder.layout.listImg.load(ContentUris.withAppendedId(artUri, datas[position].album_id))
 
     }
 

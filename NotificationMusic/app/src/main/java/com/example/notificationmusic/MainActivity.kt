@@ -42,11 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         btnStart.setOnClickListener {
             getAudioList()
-/*
-            for(i in datas) {
-                Log.d("musicList", i.title)
-            }
-*/
+
             viewManager = LinearLayoutManager(applicationContext)
             viewAdapter = ListAdapter(datas)
 
@@ -110,7 +106,6 @@ class MainActivity : AppCompatActivity() {
                 sortOrder
         )?.use { cursor ->
             while (cursor.moveToNext()) {
-//                Log.d("musicList", cursor.getString(1))
                 datas.add(Music(cursor.getLong(0), cursor.getString(1),
                 cursor.getString(2), cursor.getString(3),
                 cursor.getLong(4) ))
