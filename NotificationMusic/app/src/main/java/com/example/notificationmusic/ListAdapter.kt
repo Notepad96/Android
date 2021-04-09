@@ -10,7 +10,7 @@ import coil.load
 import kotlinx.android.synthetic.main.list_item.view.*
 import kotlinx.android.synthetic.main.music_noti.view.*
 
-class ListAdapter(val datas: List<MusicInfo>) : RecyclerView.Adapter<ListAdapter.MyViewHolder>(){
+class ListAdapter(val datas: List<Music>) : RecyclerView.Adapter<ListAdapter.MyViewHolder>(){
 
     class MyViewHolder(val layout: View) : RecyclerView.ViewHolder(layout)
 

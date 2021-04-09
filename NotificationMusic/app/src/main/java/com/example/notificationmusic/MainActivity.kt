@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
 
 class MainActivity : AppCompatActivity() {
     var LOADER_ID = 1125
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     val requestPermissionms = arrayOf(
         Manifest.permission.READ_EXTERNAL_STORAGE
     )
-    var datas: MutableList<MusicInfo> = mutableListOf()
+    var datas: MutableList<Music> = mutableListOf()
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         btnStart.setOnClickListener {
             getAudioList()
-
+/*
             viewManager = LinearLayoutManager(applicationContext)
             viewAdapter = ListAdapter(datas)
 
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
                 layoutManager = viewManager
                 adapter = viewAdapter
             }
+ */
         }
 
     }
@@ -87,6 +89,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAudioList() {
+        val projection = arrayOf(MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE,
+                MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.ALBUM,
+                MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.DURATION)
+        val selection = "${MediaStore.Audio.Media.IS_MUSIC} = 1"
+        val selectionArgs = null
+        val sortOrder = "${MediaStore.Audio.Media.TITLE} ASC"
+
+        applicationContext.contentResolver.query(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                projection,
+                selection,
+                selectionArgs,
+                sortOrder
+        )?.use { cursor ->
+            while (cursor.moveToNext()) {
+                Log.d("musicList", cursor.getString(1))
+            }
+        }
+
+/*
         LoaderManager.getInstance(this).initLoader(
             LOADER_ID,
             null,
@@ -108,9 +130,10 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
                     if (data != null && data.count > 0) {
+
                         while (data.moveToNext()) {
                             datas.add(
-                                MusicInfo(
+                                Music(
                                     data.getLong(data.getColumnIndex(MediaStore.Audio.Media._ID)),
                                     data.getLong(data.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)),
                                     data.getString(data.getColumnIndex(MediaStore.Audio.Media.TITLE)),
@@ -121,12 +144,12 @@ class MainActivity : AppCompatActivity() {
                                 )
                             )
 
-//                            Log.d(
-//                                "musicList",
-//                                "Title ${data.getString(data.getColumnIndex(MediaStore.Audio.Media.TITLE))}"
-//                            )
+                            Log.d(
+                                "musicList",
+                                "Title ${data.getString(data.getColumnIndex(MediaStore.Audio.Media.TITLE))}"
+                            )
                         }
-                        Toast.makeText(applicationContext, "${datas.size}", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(applicationContext, "${datas.size}", Toast.LENGTH_SHORT).show()
 
                     }
                 }
@@ -135,5 +158,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
             })
+
+ */
     }
 }
