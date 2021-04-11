@@ -8,9 +8,10 @@
 
     <ImageView
         android:id="@+id/listImg"
+        android:backgroundTint="@color/gray"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        app:srcCompat="@drawable/ic_baseline_backup_24"
+        app:srcCompat="@drawable/empty"
         android:padding="5dp"/>
 
     <LinearLayout
@@ -26,16 +27,15 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Title Test"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:gravity="center_vertical"
             />
         <TextView
             android:id="@+id/listArtist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="14sp"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
             android:text="Info Test"
             android:gravity="center_vertical"/>
 
@@ -48,6 +48,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="15sp"
+        android:paddingRight="4dp"
         android:text="03:45"/>
 
 </LinearLayout>

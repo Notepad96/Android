@@ -31,7 +31,10 @@ class ListAdapter(val datas: List<Music>) : RecyclerView.Adapter<ListAdapter.MyV
         holder.layout.listTitle.text = datas[position].title
         holder.layout.listArtist.text = datas[position].artist
         holder.layout.listDuration.text = android.text.format.DateFormat.format("mm:ss", datas[position].duration)
+
+
         holder.layout.listImg.load(ContentUris.withAppendedId(artUri, datas[position].album_id))
+        if(holder.layout.listImg.drawable == null) holder.layout.listImg.load(R.drawable.empty)
 
     }
 
