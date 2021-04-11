@@ -12,7 +12,8 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         app:srcCompat="@drawable/empty"
-        android:padding="5dp"/>
+        android:scaleType="centerInside"
+        android:layout_margin="5dp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -35,9 +36,9 @@
             android:id="@+id/listArtist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:text="Info Test"
-            android:gravity="center_vertical"/>
+            android:layout_marginBottom="5dp"/>
 
     </LinearLayout>
 

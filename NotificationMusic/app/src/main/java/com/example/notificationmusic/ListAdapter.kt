@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.loadAny
 import kotlinx.android.synthetic.main.list_item.view.*
 import kotlinx.android.synthetic.main.music_noti.view.*
 
@@ -26,15 +28,21 @@ class ListAdapter(val datas: List<Music>) : RecyclerView.Adapter<ListAdapter.MyV
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        Log.d("musicList", datas[position].album_id.toString())
+//        Log.d("musicList", ContentUris.withAppendedId(artUri, datas[position].album_id).)
 
         holder.layout.listTitle.text = datas[position].title
         holder.layout.listArtist.text = datas[position].artist
         holder.layout.listDuration.text = android.text.format.DateFormat.format("mm:ss", datas[position].duration)
 
 
-        holder.layout.listImg.load(ContentUris.withAppendedId(artUri, datas[position].album_id))
-        if(holder.layout.listImg.drawable == null) holder.layout.listImg.load(R.drawable.empty)
+
+        holder.layout.listImg.load(ContentUris.withAppendedId(artUri, datas[position].album_id)) {
+            crossfade(true)
+            placeholder(R.drawable.empty)
+            error(R.drawable.empty)
+        }
+
+
 
     }
 
