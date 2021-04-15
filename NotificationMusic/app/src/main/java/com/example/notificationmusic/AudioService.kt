@@ -5,10 +5,11 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
+import android.os.PowerManager
 
 class AudioService : Service() {
     var binder = AudioServiceBinder()
-    lateinit var mediaPlayer: MediaPlayer
+    var mediaPlayer: MediaPlayer? = null
     var isPrepared: Boolean = true
 
     class AudioServiceBinder : Binder() {
@@ -19,6 +20,22 @@ class AudioService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+        mediaPlayer = MediaPlayer()
+        mediaPlayer?.setWakeMode(applicationContext, PowerManager.PARTIAL_WAKE_LOCK)
+        mediaPlayer?.setOnPreparedListener {
+            isPrepared = true
+            mediaPlayer?.start()
+        }
+        mediaPlayer?.setOnCompletionListener {
+            isPrepared = false
+        }
+        mediaPlayer?.setOnErrorListener {
+            isPrepared = false
+            false
+        }
+        mediaPlayer?.setOnSeekCompleteListener {
+
+        }
     }
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -27,6 +44,10 @@ class AudioService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-
+        if(mediaPlayer != null) {
+            mediaPlayer?.stop()
+            mediaPlayer?.release()
+            mediaPlayer = null
+        }
     }
 }
