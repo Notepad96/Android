@@ -6,11 +6,15 @@ import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
 import android.os.PowerManager
+import android.provider.MediaStore
 
 class AudioService : Service() {
     var binder = AudioServiceBinder()
     var mediaPlayer: MediaPlayer? = null
     var isPrepared: Boolean = true
+
+    var datas = mutableListOf<Music>()
+    var currentPosition = 0
 
     class AudioServiceBinder : Binder() {
         fun getService(): AudioService {
@@ -49,5 +53,44 @@ class AudioService : Service() {
             mediaPlayer?.release()
             mediaPlayer = null
         }
+    }
+
+    private fun getAudioList() {
+        val projection = arrayOf(
+                MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.TITLE,
+                MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.ALBUM,
+                MediaStore.Audio.Media.DURATION)
+        val selection = null //"${MediaStore.Audio.Media.IS_MUSIC} = 1"
+        val selectionArgs = null
+        val sortOrder = "${MediaStore.Audio.Media.TITLE} ASC"
+
+        applicationContext.contentResolver.query(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                projection,
+                selection,
+                selectionArgs,
+                sortOrder
+        )?.use { cursor ->
+            while (cursor.moveToNext()) {
+                datas.add(Music(cursor.getLong(0), cursor.getString(1),
+                        cursor.getString(2), cursor.getString(3),
+                        cursor.getLong(4) ))
+            }
+        }
+    }
+
+    fun prepare() {
+//        mediaPlayer.setDataSource(datas[currentPosition].album_id)
+    }
+
+    fun play() {
+
+    }
+
+    fun forward() {
+        if(datas.size - 1 > currentPosition++) {
+            currentPosition = 0
+        }
+
     }
 }

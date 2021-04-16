@@ -112,57 +112,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-/*
-        LoaderManager.getInstance(this).initLoader(
-            LOADER_ID,
-            null,
-            object : LoaderManager.LoaderCallbacks<Cursor> {
-                override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-                    var uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-
-                    var musicInfo = arrayOf(
-                        MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE,
-                        MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.ALBUM,
-                        MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.DURATION,
-                        MediaStore.Audio.Media.DATA
-                    )
-                    var select = "${MediaStore.Audio.Media.IS_MUSIC} = 1"
-                    var sort = "${MediaStore.Audio.Media.TITLE} ASC"
-
-                    return CursorLoader(applicationContext, uri, musicInfo, select, null, sort)
-                }
-
-                override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-                    if (data != null && data.count > 0) {
-
-                        while (data.moveToNext()) {
-                            datas.add(
-                                Music(
-                                    data.getLong(data.getColumnIndex(MediaStore.Audio.Media._ID)),
-                                    data.getLong(data.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)),
-                                    data.getString(data.getColumnIndex(MediaStore.Audio.Media.TITLE)),
-                                    data.getString(data.getColumnIndex(MediaStore.Audio.Media.ARTIST)),
-                                    data.getString(data.getColumnIndex(MediaStore.Audio.Media.ALBUM)),
-                                    data.getLong(data.getColumnIndex(MediaStore.Audio.Media.DURATION)),
-                                    data.getString(data.getColumnIndex(MediaStore.Audio.Media.DATA))
-                                )
-                            )
-
-                            Log.d(
-                                "musicList",
-                                "Title ${data.getString(data.getColumnIndex(MediaStore.Audio.Media.TITLE))}"
-                            )
-                        }
-                        //Toast.makeText(applicationContext, "${datas.size}", Toast.LENGTH_SHORT).show()
-
-                    }
-                }
-
-                override fun onLoaderReset(loader: Loader<Cursor>) {
-
-                }
-            })
-
- */
     }
 }
