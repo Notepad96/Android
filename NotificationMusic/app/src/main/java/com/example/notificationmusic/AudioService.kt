@@ -29,7 +29,7 @@ class AudioService : Service() {
         mediaPlayer?.setOnCompletionListener {
             isPrepared = false
         }
-        mediaPlayer?.setOnErrorListener {
+        mediaPlayer?.setOnErrorListener() { mp, what, extra ->
             isPrepared = false
             false
         }
