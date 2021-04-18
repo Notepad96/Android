@@ -40,6 +40,7 @@ class AudioService : Service() {
         mediaPlayer?.setOnSeekCompleteListener {
 
         }
+        getAudioList()
     }
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -80,17 +81,43 @@ class AudioService : Service() {
     }
 
     fun prepare() {
-//        mediaPlayer.setDataSource(datas[currentPosition].album_id)
+        mediaPlayer?.setDataSource(datas[currentPosition].title)
+        mediaPlayer?.prepareAsync()
+    }
+
+    fun stop() {
+        mediaPlayer?.stop()
+        mediaPlayer?.reset()
+    }
+
+    fun play(position: Int) {
+        stop()
+        prepare()
     }
 
     fun play() {
+        if(isPrepared) {
+            mediaPlayer?.start()
+        }
+    }
 
+    fun pause() {
+        if(isPrepared) {
+            mediaPlayer?.pause()
+        }
     }
 
     fun forward() {
         if(datas.size - 1 > currentPosition++) {
             currentPosition = 0
         }
+        play(currentPosition)
+    }
 
+    fun rewind() {
+        if(--currentPosition < 0) {
+            currentPosition = datas.size - 1
+        }
+        play(currentPosition)
     }
 }
