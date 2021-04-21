@@ -1,8 +1,10 @@
 package com.example.musicplayer
 
 import android.Manifest
+import android.content.ContentUris
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -10,6 +12,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import coil.load
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,8 +20,13 @@ class MainActivity : AppCompatActivity() {
     private val requestPermissions = arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE
     )
+    val artUri = Uri.parse("content://media/external/audio/albumart")
+
     var datas: MutableList<Music> = mutableListOf()
-    lateinit var mediaPlayer: MediaPlayer
+    var mediaPlayer: MediaPlayer? = null
+    var position = 0
+    var end = 0
+    var isPlaying = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +36,36 @@ class MainActivity : AppCompatActivity() {
         getAudioList()
 
         btnPlay.setOnClickListener {
+            setMusic()
 
+            isPlaying = if(isPlaying) {
+                mediaPlayer?.start()
+                btnPlay.setBackgroundResource(R.drawable.ic_baseline_pause_circle_24)
+                false
+            } else {
+                mediaPlayer?.pause()
+                btnPlay.setBackgroundResource(R.drawable.ic_baseline_play_circle_24)
+                true
+            }
         }
 
     }
 
+    private fun setMusic() {
+        val content: Uri = ContentUris.withAppendedId(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                datas[position].album_id
+        )
+        imgMusic.load( ContentUris.withAppendedId(artUri , datas[position].album_id)) {
+            crossfade(true)
+            error(R.drawable.empty)
+        }
+
+        mediaPlayer = MediaPlayer.create(this, content)
+    }
+
     //    권한 체크
-    fun checkPermissions() {
+    private fun checkPermissions() {
         var rejectedPermissionList = ArrayList<String>()
 
         for(permission in requestPermissions) {
@@ -88,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                         cursor.getLong(4) ))
             }
         }
-
+        end = datas.size
     }
 
 }
