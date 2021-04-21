@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private val requestPermissions = arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE
     )
+    val audioUri = Uri.parse("content://media/external/audio/media")
     val artUri = Uri.parse("content://media/external/audio/albumart")
 
     var datas: MutableList<Music> = mutableListOf()
@@ -52,16 +53,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setMusic() {
-        val content: Uri = ContentUris.withAppendedId(
+        val content: Uri = Uri.withAppendedPath(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                datas[position].album_id
+                datas[position].file_id
         )
         imgMusic.load( ContentUris.withAppendedId(artUri , datas[position].album_id)) {
             crossfade(true)
             error(R.drawable.empty)
         }
+        Log.d("uri", content.toString())
 
-        mediaPlayer = MediaPlayer.create(this, content)
+        mediaPlayer = MediaPlayer.create(applicationContext, content)
     }
 
     //    권한 체크
@@ -99,6 +101,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getAudioList() {
         val projection = arrayOf(
+                MediaStore.Files.FileColumns._ID,
                 MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.ALBUM,
                 MediaStore.Audio.Media.DURATION)
@@ -114,9 +117,9 @@ class MainActivity : AppCompatActivity() {
                 sortOrder
         )?.use { cursor ->
             while (cursor.moveToNext()) {
-                datas.add(Music(cursor.getLong(0), cursor.getString(1),
-                        cursor.getString(2), cursor.getString(3),
-                        cursor.getLong(4) ))
+                datas.add(Music(cursor.getString(0), cursor.getLong(1), cursor.getString(2),
+                        cursor.getString(3), cursor.getString(4),
+                        cursor.getLong(5) ))
             }
         }
         end = datas.size
