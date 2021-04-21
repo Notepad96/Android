@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
     private val requestPermissions = arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE
     )
-    val audioUri = Uri.parse("content://media/external/audio/media")
     val artUri = Uri.parse("content://media/external/audio/albumart")
 
     var datas: MutableList<Music> = mutableListOf()
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         getAudioList()
 
         btnPlay.setOnClickListener {
-            setMusic()
+            if(mediaPlayer == null) setMusic()
 
             isPlaying = if(isPlaying) {
                 mediaPlayer?.start()
