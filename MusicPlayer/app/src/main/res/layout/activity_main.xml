@@ -36,10 +36,10 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="15dp"
+        android:longClickable="true"
         android:progress="0"
-        android:progressBackgroundTint="#FF6A6A"
-        android:progressTint="#CF0000"
-        android:thumbTint="#CF0000" />
+        android:progressDrawable="@drawable/seekbar_skin"
+        android:thumb="@drawable/seekbar_tumb" />
 
     <LinearLayout
         android:layout_width="300dp"

@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     var mediaPlayer: MediaPlayer? = null
     var position = 0
     var end = 0
-    var isPlaying = true
+    var isPlaying = false
 
     lateinit var runnable: Runnable
     var handler = Handler()
@@ -42,17 +42,14 @@ class MainActivity : AppCompatActivity() {
 
         btnPlay.setOnClickListener {
             if(mediaPlayer == null) setMusic()
+            isPlaying = !isPlaying
+            musicStatus()
+        }
 
-            isPlaying = if(isPlaying) {
-                mediaPlayer?.start()
-                btnPlay.setImageResource(R.drawable.ic_baseline_pause_circle_vector)
-                handler.postDelayed(runnable, 1000)
-                false
-            } else {
-                mediaPlayer?.pause()
-                btnPlay.setImageResource(R.drawable.ic_baseline_play_circle_vector)
-                true
-            }
+        btnNext.setOnClickListener {
+            positionChange(1)
+            setMusic()
+            musicStatus()
         }
 
         seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
@@ -71,18 +68,28 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
         runnable = Runnable {
             seekBar.progress = mediaPlayer!!.currentPosition
             handler.postDelayed(runnable, 1000)
         }
 
 
-//        mediaPlayer.setOnCompletionListener {
-//            positionChange(1)
-//            setMusic()
-//        }
+        mediaPlayer?.setOnSeekCompleteListener {
+            positionChange(1)
+            setMusic()
+        }
 
+    }
+
+    private fun musicStatus() {
+        if(isPlaying) {
+            mediaPlayer?.start()
+            btnPlay.setImageResource(R.drawable.ic_baseline_pause_circle_vector)
+            handler.postDelayed(runnable, 1000)
+        } else {
+            mediaPlayer?.pause()
+            btnPlay.setImageResource(R.drawable.ic_baseline_play_circle_vector)
+        }
     }
 
     fun positionChange(ac: Int) {
@@ -95,6 +102,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setMusic() {
+        mediaPlayer?.stop()
+        mediaPlayer = null
         val content: Uri = Uri.withAppendedPath(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 datas[position].file_id
