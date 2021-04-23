@@ -40,11 +40,12 @@ class MainActivity : AppCompatActivity() {
 
             isPlaying = if(isPlaying) {
                 mediaPlayer?.start()
-                btnPlay.setBackgroundResource(R.drawable.ic_baseline_pause_circle_24)
+
+                btnPlay.setImageResource(R.drawable.ic_baseline_pause_circle_vector)
                 false
             } else {
                 mediaPlayer?.pause()
-                btnPlay.setBackgroundResource(R.drawable.ic_baseline_play_circle_24)
+                btnPlay.setImageResource(R.drawable.ic_baseline_play_circle_vector)
                 true
             }
         }

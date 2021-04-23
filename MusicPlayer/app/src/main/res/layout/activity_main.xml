@@ -44,11 +44,11 @@
             />
         <ImageButton
             android:id="@+id/btnPlay"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_baseline_play_circle_24"
-            android:background="@drawable/btn_bg"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_baseline_play_circle_vector"
             android:layout_marginHorizontal="20dp"
+            android:background="@drawable/btn_bg"
             />
         <ImageButton
             android:id="@+id/btnNext"
