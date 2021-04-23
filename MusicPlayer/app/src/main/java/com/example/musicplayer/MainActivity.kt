@@ -63,6 +63,9 @@ class MainActivity : AppCompatActivity() {
         Log.d("uri", content.toString())
 
         mediaPlayer = MediaPlayer.create(applicationContext, content)
+
+        seekBar.progress = 0
+        seekBar.max = mediaPlayer!!.duration
     }
 
     //    권한 체크
