@@ -45,7 +45,11 @@ class MainActivity : AppCompatActivity() {
             isPlaying = !isPlaying
             musicStatus()
         }
-
+        btnRewind.setOnClickListener {
+            positionChange(0)
+            setMusic()
+            musicStatus()
+        }
         btnNext.setOnClickListener {
             positionChange(1)
             setMusic()
@@ -77,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         mediaPlayer?.setOnSeekCompleteListener {
             positionChange(1)
             setMusic()
+            musicStatus()
         }
 
     }
