@@ -7,8 +7,10 @@ import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -28,6 +30,9 @@ class MainActivity : AppCompatActivity() {
     var end = 0
     var isPlaying = true
 
+    lateinit var runnable: Runnable
+    var handler = Handler()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,8 +45,8 @@ class MainActivity : AppCompatActivity() {
 
             isPlaying = if(isPlaying) {
                 mediaPlayer?.start()
-
                 btnPlay.setImageResource(R.drawable.ic_baseline_pause_circle_vector)
+                handler.postDelayed(runnable, 1000)
                 false
             } else {
                 mediaPlayer?.pause()
@@ -50,6 +55,43 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if(fromUser) {
+                    mediaPlayer?.seekTo(progress)
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+        })
+
+
+        runnable = Runnable {
+            seekBar.progress = mediaPlayer!!.currentPosition
+            handler.postDelayed(runnable, 1000)
+        }
+
+
+//        mediaPlayer.setOnCompletionListener {
+//            positionChange(1)
+//            setMusic()
+//        }
+
+    }
+
+    fun positionChange(ac: Int) {
+        when(ac) {
+            0 -> position--
+            1 -> position++
+        }
+        if(position == end) position = 0
+        else if(position < 0) position = end - 1
     }
 
     private fun setMusic() {
@@ -67,6 +109,7 @@ class MainActivity : AppCompatActivity() {
 
         seekBar.progress = 0
         seekBar.max = mediaPlayer!!.duration
+        textTitle.text = "${datas[position].artist} - ${datas[position].title}"
     }
 
     //    권한 체크
