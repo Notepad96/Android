@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class MyAdapter(val datas: MutableList<Music>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     class MyViewHolder(val layout: View): RecyclerView.ViewHolder(layout)
 
@@ -17,6 +17,6 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return datas.size
     }
 }
