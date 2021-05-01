@@ -14,6 +14,7 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import kotlinx.android.synthetic.main.activity_main.*
@@ -44,6 +45,15 @@ class MainActivity : AppCompatActivity() {
 
         checkPermissions()
         getAudioList()
+
+        viewManager = LinearLayoutManager(applicationContext)
+        viewAdapter = MyAdapter(datas)
+
+        recyclerView = listMusic.apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = viewAdapter
+        }
     }
 
 
