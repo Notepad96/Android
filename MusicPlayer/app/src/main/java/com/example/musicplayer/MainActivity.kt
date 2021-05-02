@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private val artUri: Uri = Uri.parse("content://media/external/audio/albumart")
     private lateinit var musics: MusicList
 
-    lateinit var musicPreferences: SharedPreferences
+    private lateinit var musicPreferences: SharedPreferences
 
     lateinit var runnable: Runnable
     var handler = Handler()
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         musics.initMusicList()
 
         viewManager = LinearLayoutManager(applicationContext)
-        viewAdapter = MyAdapter(musics.musicList)
+        viewAdapter = MyAdapter(musics.musicList, musicPreferences)
 
         recyclerView = listMusic.apply {
             setHasFixedSize(true)

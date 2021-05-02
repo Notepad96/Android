@@ -21,7 +21,7 @@ class MusicDetail : AppCompatActivity() {
     private val artUri: Uri = Uri.parse("content://media/external/audio/albumart")
 
     private lateinit var musics: MusicList
-    var musicPreferences: SharedPreferences = getSharedPreferences("music", MODE_PRIVATE)
+    lateinit var musicPreferences: SharedPreferences
 
     lateinit var runnable: Runnable
     var handler = Handler()
@@ -29,10 +29,12 @@ class MusicDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_music_detail)
+        musicPreferences = getSharedPreferences("music", MODE_PRIVATE)
 
         musics = MusicList(applicationContext)
         musics.initMusicList()
-
+        position = musicPreferences.getInt("pos", 0)
+        isPlaying = musicPreferences.getBoolean("playing", false)
 
         btnPlay.setOnClickListener {
             if(mediaPlayer == null) setMusic()
@@ -115,6 +117,7 @@ class MusicDetail : AppCompatActivity() {
         )
         imgMusic.load( ContentUris.withAppendedId(artUri , musics.musicList[position].album_id)) {
             crossfade(true)
+            placeholder(R.drawable.empty)
             error(R.drawable.empty)
         }
         Log.d("uri", content.toString())
