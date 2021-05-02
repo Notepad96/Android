@@ -7,7 +7,6 @@ import android.provider.MediaStore
 class MusicList(val context: Context) {
     var musicList: MutableList<Music> = mutableListOf()
 
-
     fun initMusicList() {
         val projection = arrayOf(
                 MediaStore.Files.FileColumns._ID,

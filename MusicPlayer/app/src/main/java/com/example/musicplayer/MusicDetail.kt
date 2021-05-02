@@ -10,13 +10,15 @@ import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.SeekBar
+import androidx.core.content.edit
+import coil.load
 import kotlinx.android.synthetic.main.activity_music_detail.*
 
 class MusicDetail : AppCompatActivity() {
     var mediaPlayer: MediaPlayer? = null
     var position = 0
-    var end = 0
     var isPlaying = false
+    private val artUri: Uri = Uri.parse("content://media/external/audio/albumart")
 
     private lateinit var musics: MusicList
     var musicPreferences: SharedPreferences = getSharedPreferences("music", MODE_PRIVATE)
@@ -28,10 +30,16 @@ class MusicDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_music_detail)
 
+        musics = MusicList(applicationContext)
+        musics.initMusicList()
+
 
         btnPlay.setOnClickListener {
             if(mediaPlayer == null) setMusic()
             isPlaying = !isPlaying
+            musicPreferences.edit{
+                putBoolean("playing", isPlaying)
+            }
             musicStatus()
         }
         btnRewind.setOnClickListener {
@@ -86,13 +94,16 @@ class MusicDetail : AppCompatActivity() {
         }
     }
 
-    fun positionChange(ac: Int) {
+    private fun positionChange(ac: Int) {
         when(ac) {
             0 -> position--
             1 -> position++
         }
-        if(position == end) position = 0
-        else if(position < 0) position = end - 1
+        if(position == musics.getCount()) position = 0
+        else if(position < 0) position = musics.getCount() - 1
+        musicPreferences.edit {
+            putInt("pos", position)
+        }
     }
 
     private fun setMusic() {
@@ -100,9 +111,9 @@ class MusicDetail : AppCompatActivity() {
         mediaPlayer = null
         val content: Uri = Uri.withAppendedPath(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-            datas[position].file_id
+            musics.musicList[position].file_id
         )
-        imgMusic.load( ContentUris.withAppendedId(artUri , datas[position].album_id)) {
+        imgMusic.load( ContentUris.withAppendedId(artUri , musics.musicList[position].album_id)) {
             crossfade(true)
             error(R.drawable.empty)
         }
@@ -112,6 +123,6 @@ class MusicDetail : AppCompatActivity() {
 
         seekBar.progress = 0
         seekBar.max = mediaPlayer!!.duration
-        textTitle.text = "${datas[position].artist} - ${datas[position].title}"
+        textTitle.text = "${musics.musicList[position].artist} - ${musics.musicList[position].title}"
     }
 }

@@ -22,13 +22,12 @@
             android:layout_weight="2"
             android:text="Title"
             android:gravity="center_vertical"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/txtListArtist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="artist"
             android:textSize="14sp"/>

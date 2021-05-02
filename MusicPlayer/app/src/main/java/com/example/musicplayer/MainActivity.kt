@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity() {
     private val requestPermissions = arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE
     )
-    val artUri = Uri.parse("content://media/external/audio/albumart")
+    private val artUri: Uri = Uri.parse("content://media/external/audio/albumart")
     private lateinit var musics: MusicList
 
-    var musicPreferences: SharedPreferences = getSharedPreferences("music", MODE_PRIVATE)
+    lateinit var musicPreferences: SharedPreferences
 
     lateinit var runnable: Runnable
     var handler = Handler()
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         checkPermissions()
-
+        musicPreferences = getSharedPreferences("music", MODE_PRIVATE)
 
         musics = MusicList(applicationContext)
         musics.initMusicList()

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import kotlinx.android.synthetic.main.list_item.view.*
+import java.text.SimpleDateFormat
 
 class MyAdapter(val datas: MutableList<Music>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
@@ -27,6 +28,10 @@ class MyAdapter(val datas: MutableList<Music>) : RecyclerView.Adapter<MyAdapter.
             placeholder(R.drawable.empty)
             error(R.drawable.empty)
         }
+        holder.layout.txtListArtist.text = datas[position].artist
+        holder.layout.txtListTitle.text = datas[position].title
+        holder.layout.txtListTime.text = SimpleDateFormat("mm:ss").format(datas[position].duration)
+
     }
 
     override fun getItemCount(): Int {
