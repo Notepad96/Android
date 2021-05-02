@@ -2,6 +2,7 @@ package com.example.musicplayer
 
 import android.Manifest
 import android.content.ContentUris
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.net.Uri
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_music_detail.*
 
 class MainActivity : AppCompatActivity() {
     private val PERMISSION_CODE = 111
@@ -25,12 +27,9 @@ class MainActivity : AppCompatActivity() {
             Manifest.permission.READ_EXTERNAL_STORAGE
     )
     val artUri = Uri.parse("content://media/external/audio/albumart")
+    private lateinit var musics: MusicList
 
-    val musics = MusicList(applicationContext)
-    var mediaPlayer: MediaPlayer? = null
-    var position = 0
-    var end = 0
-    var isPlaying = false
+    var musicPreferences: SharedPreferences = getSharedPreferences("music", MODE_PRIVATE)
 
     lateinit var runnable: Runnable
     var handler = Handler()
@@ -42,17 +41,31 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         checkPermissions()
-        getAudioList()
+
+
+        musics = MusicList(applicationContext)
+        musics.initMusicList()
 
         viewManager = LinearLayoutManager(applicationContext)
-        viewAdapter = MyAdapter(musics.getMusicList())
+        viewAdapter = MyAdapter(musics.musicList)
 
         recyclerView = listMusic.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
+        }
+
+        var pos = musicPreferences.getInt("pos", 0)
+        imgTempPlay.load( ContentUris.withAppendedId(artUri , musics.musicList[pos].album_id)) {
+            crossfade(true)
+            error(R.drawable.empty)
+        }
+        txtTempPlay.text = "${musics.musicList[pos].artist} - ${musics.musicList[pos].title}"
+        if(musicPreferences.getBoolean("playing", false)) {
+            btnTempPlay.setBackgroundResource(R.drawable.ic_baseline_pause_circle_vector)
+        } else {
+            btnTempPlay.setBackgroundResource(R.drawable.ic_baseline_play_circle_vector)
         }
     }
 
@@ -90,9 +103,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getAudioList() {
-        musics.initMusicList()
-        end = musics.getCount()
-    }
 
 }

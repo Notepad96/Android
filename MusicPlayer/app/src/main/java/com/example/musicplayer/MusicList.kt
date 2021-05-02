@@ -1,10 +1,12 @@
 package com.example.musicplayer
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.provider.MediaStore
 
 class MusicList(val context: Context) {
-    private var musicList: MutableList<Music> = mutableListOf()
+    var musicList: MutableList<Music> = mutableListOf()
+
 
     fun initMusicList() {
         val projection = arrayOf(
@@ -31,9 +33,6 @@ class MusicList(val context: Context) {
         }
     }
 
-    fun getMusicList(): MutableList<Music> {
-        return musicList
-    }
     fun getCount(): Int {
         return musicList.size
     }

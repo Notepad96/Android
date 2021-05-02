@@ -1,6 +1,7 @@
 package com.example.musicplayer
 
 import android.content.ContentUris
+import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,9 @@ class MusicDetail : AppCompatActivity() {
     var position = 0
     var end = 0
     var isPlaying = false
+
+    private lateinit var musics: MusicList
+    var musicPreferences: SharedPreferences = getSharedPreferences("music", MODE_PRIVATE)
 
     lateinit var runnable: Runnable
     var handler = Handler()
