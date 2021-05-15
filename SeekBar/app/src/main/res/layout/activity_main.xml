@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/skb1"
+        />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/skb2"
+
+        android:progressDrawable="@drawable/skb_custom"
+        android:thumb="@drawable/skb_thumb"
+        android:progress="30"
+        android:splitTrack="false"
+        />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/skb3"
+
+        android:progressDrawable="@drawable/skb_custom2"
+        android:thumb="@drawable/skb_thumb2"
+        android:progress="30"
+
+        android:paddingStart="-4dp"
+        android:paddingEnd="-4dp"
+        android:splitTrack="false"
+
+        />
+
+    <TextView
+        android:id="@+id/txtProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Progress : 0"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        />
+
+</LinearLayout>
