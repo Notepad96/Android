@@ -8,9 +8,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        toolbar.title = "TEST TEXT"
-        setSupportActionBar(toolbar)
-        if(supportActionBar != null) supportActionBar?.setDisplayHomeAsUpEnabled(false)
+//
+//        toolbar.title = "TEST TEXT"
+//        setSupportActionBar(toolbar)
+//        if(supportActionBar != null) supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 }
