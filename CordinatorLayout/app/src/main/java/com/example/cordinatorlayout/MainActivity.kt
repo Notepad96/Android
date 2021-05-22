@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar.title = "TEST TEXT"
+
         setSupportActionBar(toolbar)
         if(supportActionBar != null) supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
