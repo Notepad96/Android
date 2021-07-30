@@ -12,20 +12,28 @@ class MyBtn(context: Context) {
     var h = 100
     var txt = "버튼"
 
-    var x = 0
-    var y = 0
+    var x = 0f
+    var y = 0f
+
+
 
     init {
         btn.width = w
         btn.height = h
         btn.text = txt
         btn.setOnTouchListener { v, event ->
-            if(event.action == MotionEvent.ACTION_DOWN) {
-                x = event.x.toInt()
-                y = event.y.toInt()
-            } else if(event.action == MotionEvent.ACTION_MOVE) {
-
-                v.layoutParams = (v.width, v.height, (event.x - (v.width / 2)).toInt(), (event.y - v.height).toInt())
+            when(event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    x = v.x - event.rawX
+                    y = v.y - event.rawY
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    v.animate()
+                            .x(event.rawX + x)
+                            .y(event.rawY + y)
+                            .setDuration(0)
+                            .start()
+                }
             }
             true
         }
