@@ -3,6 +3,7 @@ package com.example.moveobject
 import android.app.ActionBar
 import android.content.Context
 import android.view.MotionEvent
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 
@@ -15,12 +16,14 @@ class MyBtn(context: Context) {
     var x = 0f
     var y = 0f
 
-
-
     init {
         btn.width = w
         btn.height = h
         btn.text = txt
+        startMove()
+    }
+
+    fun startMove() {
         btn.setOnTouchListener { v, event ->
             when(event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -35,6 +38,12 @@ class MyBtn(context: Context) {
                             .start()
                 }
             }
+            true
+        }
+    }
+
+    fun fixedMove() {
+        btn.setOnTouchListener { v, event ->
             true
         }
     }
