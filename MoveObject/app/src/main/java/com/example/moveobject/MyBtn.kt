@@ -2,6 +2,7 @@ package com.example.moveobject
 
 import android.app.ActionBar
 import android.content.Context
+import android.content.Intent
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,10 @@ class MyBtn(context: Context) {
         btn.height = h
         btn.text = txt
         startMove()
+        btn.setOnClickListener {
+            val intent = Intent(context, SettingBtn::class.java)
+            context.startActivity(intent)
+        }
     }
 
     fun startMove() {
