@@ -12,14 +12,14 @@ class MyLayout(context: Context) {
             LinearLayout.LayoutParams.MATCH_PARENT)
     var dm = context.resources.displayMetrics
     var w = dm.widthPixels * 1/2
-    var h = dm.heightPixels * 1/2
+    var h = dm.heightPixels * 1/5
 
     init {
         lp.width = w
         lp.height = h
         lp.gravity = Gravity.CENTER
         layout.layoutParams = lp
-        layout.setBackgroundColor(getLayout().resources.getColor(R.color.gray))
+        layout.setBackgroundColor(context.resources.getColor(R.color.gray))
 
         val btn = MyBtn(context)
         layout.addView(btn.getButton())
