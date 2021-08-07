@@ -14,9 +14,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         addBtn.setOnClickListener {
-            val newBtn = MyBtn(this)
-            btnList.add(newBtn)
-            mainLayout.addView(newBtn.getButton())
+            val myLayout = MyLayout(this)
+            mainLayout.addView(myLayout.getLayout())
+//            val newBtn = MyBtn(this)
+//            btnList.add(newBtn)
+//            mainLayout.addView(newBtn.getButton())
         }
 
         fixBtn.setOnClickListener {
