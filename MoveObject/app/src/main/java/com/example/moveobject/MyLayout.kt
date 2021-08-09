@@ -12,7 +12,7 @@ class MyLayout(context: Context) {
             LinearLayout.LayoutParams.MATCH_PARENT)
     var dm = context.resources.displayMetrics
     var w = dm.widthPixels * 1/2
-    var h = dm.heightPixels * 1/5
+    var h = w * 192/124
 
     init {
         lp.width = w
