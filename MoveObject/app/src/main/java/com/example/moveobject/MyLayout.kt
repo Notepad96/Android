@@ -33,27 +33,31 @@ class MyLayout(context: Context) {
         val btn = MyBtn(context)
         layout.addView(btn.getButton())
     }
-//
-//    fun startMove() {
-//        layout.setOnTouchListener { v, event ->
-//            when(event.action) {
-//                MotionEvent.ACTION_DOWN -> {
-//                    x = v.x - event.rawX
-//                    y = v.y - event.rawY
-//                }
-//                MotionEvent.ACTION_MOVE -> {
-//                    v.animate()
-//                            .x(event.rawX + x)
-//                            .y(event.rawY + y)
-//                            .setDuration(0)
-//                            .start()
-//                }
-//            }
-//            true
-//        }
-//    }
 
+    // 이동 시 화면 벗어남 있음
+    /*
     fun startMove() {
+        layout.setOnTouchListener { v, event ->
+            when(event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    x = v.x - event.rawX
+                    y = v.y - event.rawY
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    v.animate()
+                            .x(event.rawX + x)
+                            .y(event.rawY + y)
+                            .setDuration(0)
+                            .start()
+                }
+            }
+            true
+        }
+    }
+     */
+
+    // 이동 시 화면 벗어남 막음
+    private fun startMove() {
         layout.setOnTouchListener { v, event ->
             var maxX = (v.parent as View).width - v.width.toFloat()
             var maxY = (v.parent as View).height - v.height.toFloat()
