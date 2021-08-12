@@ -29,22 +29,7 @@ class MyBtn(context: Context) {
     }
 
     fun startMove() {
-        btn.setOnTouchListener { v, event ->
-            when(event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    x = v.x - event.rawX
-                    y = v.y - event.rawY
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    v.animate()
-                            .x(event.rawX + x)
-                            .y(event.rawY + y)
-                            .setDuration(0)
-                            .start()
-                }
-            }
-            true
-        }
+        btn.setOnTouchListener(ObjectMove())
     }
 
     fun fixedMove() {

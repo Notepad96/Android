@@ -6,7 +6,7 @@ import android.widget.Button
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    var btnList = mutableListOf<MyBtn>()
+    lateinit var myLayout: MyLayout
     var fixed = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,23 +14,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         addBtn.setOnClickListener {
-            val myLayout = MyLayout(this)
+            myLayout = MyLayout(this)
             mainLayout.addView(myLayout.getLayout())
-//            val newBtn = MyBtn(this)
-//            btnList.add(newBtn)
-//            mainLayout.addView(newBtn.getButton())
         }
 
         fixBtn.setOnClickListener {
-            if(fixed) {
-                for( btn in btnList) {
-                    btn.fixedMove()
-                }
-            } else {
-                for( btn in btnList) {
-                    btn.startMove()
-                }
-            }
+            if(fixed) myLayout.stopMove()
+            else myLayout.startMove()
             fixed = !fixed
         }
     }

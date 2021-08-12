@@ -18,8 +18,7 @@ class MyLayout(context: Context) {
     var w = dm.widthPixels * 1/2
     var h = w * 16/9
 
-    var x = 0f
-    var y = 0f
+
 
     init {
         lp.width = w
@@ -34,54 +33,12 @@ class MyLayout(context: Context) {
         layout.addView(btn.getButton())
     }
 
-    // 이동 시 화면 벗어남 있음
-    /*
     fun startMove() {
-        layout.setOnTouchListener { v, event ->
-            when(event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    x = v.x - event.rawX
-                    y = v.y - event.rawY
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    v.animate()
-                            .x(event.rawX + x)
-                            .y(event.rawY + y)
-                            .setDuration(0)
-                            .start()
-                }
-            }
-            true
-        }
+        layout.setOnTouchListener(ObjectMove())
     }
-     */
 
-    // 이동 시 화면 벗어남 막음
-    private fun startMove() {
-        layout.setOnTouchListener { v, event ->
-            var maxX = (v.parent as View).width - v.width.toFloat()
-            var maxY = (v.parent as View).height - v.height.toFloat()
-            var tx = x
-            var ty = y
-            when(event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    x = v.x - event.rawX
-                    y = v.y - event.rawY
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    tx = event.rawX + x
-                    if(tx < 0) tx = 0f else if(tx > maxX) tx = maxX
-                    ty = event.rawY + y
-                    if(ty < 0) ty = 0f else if(ty > maxY) ty = maxY
-                    v.animate()
-                            .x(tx)
-                            .y(ty)
-                            .setDuration(0)
-                            .start()
-                }
-            }
-            true
-        }
+    fun stopMove() {
+        layout.setOnTouchListener { v, event -> true }
     }
 
     fun getLayout(): LinearLayout {

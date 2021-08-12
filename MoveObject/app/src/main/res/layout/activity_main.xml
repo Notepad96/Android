@@ -12,7 +12,7 @@
         android:id="@+id/addBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="텍스트 뷰 추가"/>
+        android:text="새 레이아웃 추가"/>
 
     <Button
         android:id="@+id/fixBtn"
