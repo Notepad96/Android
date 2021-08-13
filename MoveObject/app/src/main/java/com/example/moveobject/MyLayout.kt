@@ -15,8 +15,8 @@ class MyLayout(context: Context) {
     var lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.MATCH_PARENT)
     var dm = context.resources.displayMetrics
-    var w = dm.widthPixels * 15/16
-    var h = dm.heightPixels * 15/16
+    var w = dm.widthPixels * 3/4
+    var h = dm.heightPixels * 1/2
 
 
 

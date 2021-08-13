@@ -1,7 +1,9 @@
 package com.example.moveobject
 
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 class ObjectMove: View.OnTouchListener {
     var x = 0f
@@ -28,6 +30,7 @@ class ObjectMove: View.OnTouchListener {
                         .y(ty)
                         .setDuration(0)
                         .start()
+                Log.d("위치", "${v.x}, ${v.y}")
             }
         }
         return true

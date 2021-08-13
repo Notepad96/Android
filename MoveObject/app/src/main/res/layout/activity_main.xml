@@ -12,22 +12,19 @@
         android:id="@+id/addBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="새 레이아웃 추가"/>
+        android:text="새 레이아웃 추가" />
 
     <Button
         android:id="@+id/fixBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addBtn"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="4dp"
+        android:layout_below="@id/addBtn"
         android:text="고정/해제" />
 
     <TextView
         android:id="@+id/text01"
-        android:layout_below="@+id/fixBtn"
+        android:layout_below="@id/fixBtn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>
