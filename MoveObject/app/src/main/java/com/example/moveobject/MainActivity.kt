@@ -2,6 +2,7 @@ package com.example.moveobject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.Button
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         addBtn.setOnClickListener {
             myLayout = MyLayout(this)
             mainLayout.addView(myLayout.getLayout())
+            mainLayout.gravity = Gravity.CENTER
         }
 
         fixBtn.setOnClickListener {
