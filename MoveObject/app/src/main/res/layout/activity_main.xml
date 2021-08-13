@@ -24,4 +24,10 @@
         android:layout_marginTop="4dp"
         android:text="고정/해제" />
 
+    <TextView
+        android:id="@+id/text01"
+        android:layout_below="@+id/fixBtn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </RelativeLayout>
