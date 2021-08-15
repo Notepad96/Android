@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             myLayout = MyLayout(this)
             mainLayout.addView(myLayout.getLayout())
             myLayout.getLayout().x = 270F
-            myLayout.getLayout().y = 830F
+            myLayout.getLayout().y = 415F
         }
 
         fixBtn.setOnClickListener {
