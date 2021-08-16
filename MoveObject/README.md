@@ -2,13 +2,15 @@
 
 <pre>
 
-1. Button Border : StrokeWidth 사용
+1. LinearLayout 및 Button을 동적으로 추가 
 
-2. TextView Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+2. Touch 이벤트를 사용하여 Object 이동
 
-3. 구분선 만들기
+3. View.OnTouchListener 따로 구현하여 재사용
 
-4. Layout Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
+4. 이동 시 부모의 영역 밖으로 벗어나는 것은 불가능
+
+5. x, y 속성으로 추가 시 위치 지정
 
 
 </pre>
