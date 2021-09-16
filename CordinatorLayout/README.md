@@ -2,15 +2,15 @@
 
 <pre>
 
-1. Button Border : StrokeWidth 사용
+1. androidx.coordinatorlayout.widget.CoordinatorLayout
+    ㄴ com.google.android.material.appbar.AppBarLayout
+      ㄴ com.google.android.material.appbar.CollapsingToolbarLayout
+    ㄴ androidx.core.widget.NestedScrollView
+    
+2. CollapsingToolbarLayout 속에 기본 상태의 화면을 구성 및 아래로 스크롤 할 경우 고정될 Toolbar 또한 구현한다.
 
-2. TextView Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
-
-3. 구분선 만들기
-
-4. Layout Border : Drawalbe 파일 생성. Border 전체 또는 일부 방향만 적용 가능
-
-
+3. NestedScrollView은 스크롤이 가능하며 이 속에 메인 레이아웃의 들어갈 콘텐츠를 포함 시킨다.
+    
 </pre>
 
 <br><br>
