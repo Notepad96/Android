@@ -1,5 +1,7 @@
 package com.example.itemanimation
 
+import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +27,16 @@ class MyAdapter: RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        if(position != myData.size) holder.layout.textItem.text = myData[position]
+        if(position != myData.size) {
+            holder.layout.textItem.text = myData[position]
+
+            holder.layout.textItem.setOnClickListener {
+                val intent = Intent(holder.layout.context, MainActivity2::class.java)
+                holder.layout.context.startActivity(intent)
+                (holder.layout.context as Activity).overridePendingTransition(R.anim.item_top, R.anim.fade_out)
+
+            }
+        }
         else {
             holder.layout.testImage.setOnClickListener {
                 Toast.makeText(holder.layout.context, "Click Test", Toast.LENGTH_SHORT).show()
