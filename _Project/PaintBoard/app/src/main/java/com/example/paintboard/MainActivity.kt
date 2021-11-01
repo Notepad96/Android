@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
@@ -65,6 +66,9 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
             .show(this)
     }
     override fun onColorSelected(dialogId: Int, color: Int) {
+        var hexColor = String.format("#%06X", (0xFFFFFF and color))
+        Toast.makeText(applicationContext, "$hexColor", Toast.LENGTH_SHORT).show()
+
         pb.color = color
         tempColor = color
         eraseBtn.text = "지우개"
