@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
 
-        app:itemRippleColor="@color/black"
+        app:itemRippleColor="@color/purple_200"
         app:backgroundTint="@color/black"
 
         app:menu="@menu/main_menu"

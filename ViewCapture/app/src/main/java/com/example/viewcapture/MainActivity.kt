@@ -23,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun capture(view: View) {
-        var capture = getBitmapFromView(mainLayout, Color.GREEN)
+        var capture = getBitmapFromView(mainLayout)
+        // var capture = getBitmapFromView(mainLayout, Color.Blue)
 
         var storage = cacheDir
         var fileName = SimpleDateFormat("yyMMdd_HHmmss").format(Date()) + ".jpg"

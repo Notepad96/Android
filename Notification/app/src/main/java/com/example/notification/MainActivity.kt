@@ -46,6 +46,10 @@ class MainActivity : AppCompatActivity() {
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         val pendingIntent = PendingIntent.getActivity(baseContext, 0,
             intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        /*
+            FLAG_CANCEL_CURRENT : Pending 이미 존재할 경우, 기존 것을 cancel
+            FLAG_UPDATE_CURRENT : Pending 이미 존재할 경우, Extra Data 변경
+         */
 
         val builder = NotificationCompat.Builder(this, channelId)
         builder.setSmallIcon(R.drawable.ic_baseline_ac_unit_24)

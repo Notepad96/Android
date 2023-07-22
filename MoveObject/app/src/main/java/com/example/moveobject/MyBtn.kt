@@ -22,10 +22,6 @@ class MyBtn(context: Context) {
         btn.height = h
         btn.text = txt
         startMove()
-        btn.setOnClickListener {
-            val intent = Intent(context, SettingBtn::class.java)
-            context.startActivity(intent)
-        }
     }
 
     fun startMove() {
